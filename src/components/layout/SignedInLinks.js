@@ -17,6 +17,13 @@ const SignedInLinks = props => {
           <NavLink to="/" className="btn btn-floating pink lighten-1">
             {props.profile.initials}
           </NavLink>
+          <span>
+            As a{" "}
+            <b>
+              {props.profile.userType &&
+                props.profile.userType.toUpperCase().replace(/-/g, " ")}
+            </b>
+          </span>
         </li>
       </ul>
     </div>

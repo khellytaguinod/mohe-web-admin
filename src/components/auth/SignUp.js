@@ -11,16 +11,33 @@ class SignUp extends Component {
     lastName: "",
     userType: ""
   };
+
   handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+
   handleSubmit = e => {
     console.log(this.state, "state here");
     e.preventDefault();
-    // this.props.signUp(this.state);
+    this.props.signUp(this.state);
   };
+
+  // isDisabled = () => {
+  //   if (
+  //     this.state.email.length &&
+  //     this.state.firstName.length &&
+  //     this.state.lastName.length &&
+  //     this.state.password.length &&
+  //     this.state.userType.length === 0
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
+
   render() {
     const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to="/" />;
@@ -45,18 +62,29 @@ class SignUp extends Component {
             <input type="text" id="lastName" onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <select class="browser-default" onChange={this.handleChange}>
+            <select
+              class="browser-default"
+              id="userType"
+              onChange={this.handleChange}
+            >
               <option value="" disabled selected>
                 Choose user type
               </option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
-              <option value="3">Option 3</option>
+              <option value="applicant">Applicant</option>
+              <option value="mohe">Mohe</option>
+              <option value="attache">Attache</option>
+              <option value="ministry-of-educ-abroad">
+                Ministry of Educ Abroad
+              </option>
             </select>
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+            <button
+              // disabled={this.disabled}
+              className="btn pink lighten-1 z-depth-0"
+            >
+              Sign Up
+            </button>
             <div className="center red-text">
               {authError ? <p>{authError}</p> : null}
             </div>
