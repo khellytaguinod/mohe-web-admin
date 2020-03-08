@@ -1,0 +1,48 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+
+# testing
+coverage
+
+# production
+build
+www
+platforms
+plugins
+android
+ios
+
+# misc
+.DS_Store
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+git.log.csv
+
+#config
+config/*
+
+# GCP Keyfiles
+electron-8-dev-logging-keyfile.json
+
+# Environment files containing API keys and secrets
+.env
+.env.dev
+.env.staging
+.env.prod
+
+/.project
+.idea
+.idea/*
+.vscode
+misc.xml
+modules.xml
+vcs.xml
+workspace.xml
+config.xml
+__script.js
+android/
+ios/
+
