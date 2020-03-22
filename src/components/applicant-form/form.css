@@ -1,0 +1,30 @@
+select {
+  border: 1px solid #424242;
+  border-radius: 2.5px;
+}
+
+.radio-label {
+  color: #424242;
+}
+
+.radio-btn-container {
+  margin: 0;
+}
+
+.radio-btn-container > div {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.radio-btn-container > div > p {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+label {
+  color: #424242;
+}
+
+.input-field > label {
+  color: #424242 !important;
+}
