@@ -928,48 +928,60 @@ class ApplicantForm extends Component {
                       Select
                     </option>
 
-                    <option value="38">
+                    <option value="General Education Certificate -Adult Education">
                       General Education Certificate -Adult Education
                     </option>
-                    <option value="37">
+                    <option value="General Education Certificate -Full time">
                       General Education Certificate -Full time
                     </option>
-                    <option value="39">
+                    <option value="General Education Certificate -Liberal study">
                       General Education Certificate -Liberal study
                     </option>
-                    <option value="41">
+                    <option value="General Education Diploma -Adult Education">
                       General Education Diploma -Adult Education
                     </option>
-                    <option value="47">
+                    <option value="General Education Diploma -Bilingual schools">
                       General Education Diploma -Bilingual schools
                     </option>
-                    <option value="40">
+                    <option value="General Education Diploma -Full time">
                       General Education Diploma -Full time
                     </option>
-                    <option value="42">
+                    <option value="General Education Diploma -Islamic institute">
                       General Education Diploma -Islamic institute
                     </option>
-                    <option value="43">
+                    <option value="General Education Diploma -Liberal study">
                       General Education Diploma -Liberal study
                     </option>
-                    <option value="45">
-                      General Education Diploma For Special Education -Adult
+                    <option
+                      value="General Education Diploma For Special Education - Adult
+                      Education"
+                    >
+                      General Education Diploma For Special Education - Adult
                       Education
                     </option>
-                    <option value="44">
-                      General Education Diploma For Special Education -Full time
+                    <option value="General Education Diploma For Special Education - Full time">
+                      General Education Diploma For Special Education - Full
+                      time
                     </option>
-                    <option value="53">International Certificate-APID</option>
-                    <option value="50">
-                      International Certificate-GCE(A-Level
+                    <option value="International Certificate-APID">
+                      International Certificate-APID
                     </option>
-                    <option value="49">
-                      International Certificate-GCE(AS-Level
+                    <option value="International Certificate-GCE A-Level">
+                      International Certificate-GCE A-Level
                     </option>
-                    <option value="52">International Certificate-IB</option>
-                    <option value="51">International Certificate-IBD</option>
-                    <option value="48">International Certificate-IGCSE</option>
-                    <option value="46">
+                    <option value="International Certificate-GCE AS-Level">
+                      International Certificate-GCE AS-Level
+                    </option>
+                    <option value="International Certificate-IB">
+                      International Certificate-IB
+                    </option>
+                    <option value="International Certificate-IBD">
+                      International Certificate-IBD
+                    </option>
+                    <option value="International Certificate-IGCSE">
+                      International Certificate-IGCSE
+                    </option>
+                    <option value="Technical General Education Diploma -Royal Guard College">
                       Technical General Education Diploma -Royal Guard College
                     </option>
                   </select>
@@ -1639,14 +1651,14 @@ class ApplicantForm extends Component {
                     <option selected="selected" value="" disabled>
                       Select Study Mode
                     </option>
-                    <option value="N">Full Time</option>
-                    <option value="M">Member</option>
-                    <option value="D">Distance Learning</option>
-                    <option value="P">PARTIAL STUDY</option>
-                    <option value="A">Morning</option>
-                    <option value="B">Night</option>
-                    <option value="R">Research</option>
-                    <option value="C">Open Learning</option>
+                    <option value="Full Time">Full Time</option>
+                    <option value="Member">Member</option>
+                    <option value="Distance Learning">Distance Learning</option>
+                    <option value="PARTIAL STUDY">PARTIAL STUDY</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Night">Night</option>
+                    <option value="Research">Research</option>
+                    <option value="Open Learning">Open Learning</option>
                   </select>
                 </div>
               </div>
@@ -1662,174 +1674,272 @@ class ApplicantForm extends Component {
                       Select University
                     </option>
 
-                    <option value="6242">ABRI COLLEGE OF TECHNOLOGY</option>
-                    <option value="8166">AIR FORCE TECHNICAL COLLEGE</option>
-                    <option value="8147">AL DHAHIRA NURSING INSTITUTE</option>
-                    <option value="1601">AL-BAYAN COLLEGE</option>
-                    <option value="443">AL-BURAIMI COLLEGE</option>
-                    <option value="2423">AL-BURAIMI UNIVERSITY</option>
-                    <option value="8154">
+                    <option value="ABRI COLLEGE OF TECHNOLOGY">
+                      ABRI COLLEGE OF TECHNOLOGY
+                    </option>
+                    <option value="AIR FORCE TECHNICAL COLLEGE">
+                      AIR FORCE TECHNICAL COLLEGE
+                    </option>
+                    <option value="AL DHAHIRA NURSING INSTITUTE">
+                      AL DHAHIRA NURSING INSTITUTE
+                    </option>
+                    <option value="AL-BAYAN COLLEGE">AL-BAYAN COLLEGE</option>
+                    <option value="AL-BURAIMI COLLEGE">
+                      AL-BURAIMI COLLEGE
+                    </option>
+                    <option value="AL-BURAIMI UNIVERSITY">
+                      AL-BURAIMI UNIVERSITY
+                    </option>
+                    <option value="AL-KHABORAH VOCATIONAL COLLEGE FOR MARINE SCIENCES">
                       AL-KHABORAH VOCATIONAL COLLEGE FOR MARINE SCIENCES
                     </option>
-                    <option value="2421">AL-SHARQIYAH UNIVERSITY</option>
-                    <option value="439">AL-ZAHRA COLLEGE </option>
-                    <option value="8150">
+                    <option value="AL-SHARQIYAH UNIVERSITY">
+                      AL-SHARQIYAH UNIVERSITY
+                    </option>
+                    <option value="AL-ZAHRA COLLEGE">AL-ZAHRA COLLEGE</option>
+                    <option value="ALBURAIMI VOCATIONAL TRAINING CENTER">
                       ALBURAIMI VOCATIONAL TRAINING CENTER
                     </option>
-                    <option value="8168">ALDAKHILIA NURSING INSTITUTE</option>
-                    <option value="1735">ARAB OPEN UNIVERSITY</option>
-                    <option value="428">
+                    <option value="ALDAKHILIA NURSING INSTITUTE">
+                      ALDAKHILIA NURSING INSTITUTE
+                    </option>
+                    <option value="ARAB OPEN UNIVERSITY">
+                      ARAB OPEN UNIVERSITY
+                    </option>
+                    <option value="CALEDONIAN COLLEGE OF ENGINEERING">
                       CALEDONIAN COLLEGE OF ENGINEERING
                     </option>
-                    <option value="2532">
+                    <option value="COLLEGE OF APPLIED SCIENCES IN IBRI">
                       COLLEGE OF APPLIED SCIENCES IN IBRI
                     </option>
-                    <option value="441">
+                    <option value="COLLEGE OF APPLIED SCIENCES IN NIZWA">
                       COLLEGE OF APPLIED SCIENCES IN NIZWA
                     </option>
-                    <option value="1652">
+                    <option value="COLLEGE OF APPLIED SCIENCES IN RUSTAQ">
                       COLLEGE OF APPLIED SCIENCES IN RUSTAQ
                     </option>
-                    <option value="1670">
+                    <option value="COLLEGE OF APPLIED SCIENCES IN SALALAH">
                       COLLEGE OF APPLIED SCIENCES IN SALALAH
                     </option>
-                    <option value="1654">
+                    <option value="COLLEGE OF APPLIED SCIENCES IN SOHAR">
                       COLLEGE OF APPLIED SCIENCES IN SOHAR
                     </option>
-                    <option value="1653">
+                    <option value="COLLEGE OF APPLIED SCIENCES IN SUR">
                       COLLEGE OF APPLIED SCIENCES IN SUR
                     </option>
-                    <option value="435">
+                    <option value="COLLEGE OF BANKING & FINANCIAL STUDIES">
                       COLLEGE OF BANKING &amp; FINANCIAL STUDIES
                     </option>
-                    <option value="1596">COLLEGE OF SHARIA SCIENCES</option>
-                    <option value="8165">COMMAND AND STAFF COLLEGE</option>
-                    <option value="422">DHOFAR UNIVERSITY</option>
-                    <option value="1722">
+                    <option value="COLLEGE OF SHARIA SCIENCES">
+                      COLLEGE OF SHARIA SCIENCES
+                    </option>
+                    <option value="COMMAND AND STAFF COLLEGE">
+                      COMMAND AND STAFF COLLEGE
+                    </option>
+                    <option value="DHOFAR UNIVERSITY">DHOFAR UNIVERSITY</option>
+                    <option value="GERMAN UNIVERSITY OF TECHNOLOGY IN OMAN">
                       GERMAN UNIVERSITY OF TECHNOLOGY IN OMAN
                     </option>
-                    <option value="3622">
+                    <option value="GLOBAL COLLEGE OF ENGINEERING AND TECHNOLOGY">
                       GLOBAL COLLEGE OF ENGINEERING AND TECHNOLOGY
                     </option>
-                    <option value="421">GULF COLLEGE</option>
-                    <option value="16502">HIGHER JUDICIAL INSTITUTE</option>
-                    <option value="1635">HIGHER TECHNICAL COLLEGE</option>
-                    <option value="6243">IBRA COLLEGE OF TECHNOLOGY</option>
-                    <option value="8144">IBRA NURSING INSTITUTE</option>
-                    <option value="8152">IBRI VOCATIONAL COLLEGE</option>
-                    <option value="8156">
+                    <option value="GULF COLLEGE">GULF COLLEGE</option>
+                    <option value="HIGHER JUDICIAL INSTITUTE">
+                      HIGHER JUDICIAL INSTITUTE
+                    </option>
+                    <option value="HIGHER TECHNICAL COLLEGE">
+                      HIGHER TECHNICAL COLLEGE
+                    </option>
+                    <option value="IBRA COLLEGE OF TECHNOLOGY">
+                      IBRA COLLEGE OF TECHNOLOGY
+                    </option>
+                    <option value="IBRA NURSING INSTITUTE">
+                      IBRA NURSING INSTITUTE
+                    </option>
+                    <option value="IBRI VOCATIONAL COLLEGE">
+                      IBRI VOCATIONAL COLLEGE
+                    </option>
+                    <option value="INSTITUTE OF TOPOGRAPHICAL SCIENCES">
                       INSTITUTE OF TOPOGRAPHICAL SCIENCES
                     </option>
-                    <option value="438">
+                    <option value="INTERNATIONAL COLLEGE OF ENGINEERING & MANAGEMENT">
                       INTERNATIONAL COLLEGE OF ENGINEERING &amp; MANAGEMENT
                     </option>
-                    <option value="1515">
+                    <option value="INTERNATIONAL MARITIME COLLEGE OMAN">
                       INTERNATIONAL MARITIME COLLEGE OMAN
                     </option>
-                    <option value="445">MAJAN COLLEGE</option>
-                    <option value="427">MAZOON COLLEGE</option>
-                    <option value="444">MIDDLE EAST COLLEGE </option>
-                    <option value="8202">MILITARY TECHNICAL COLLEGE</option>
-                    <option value="429">
+                    <option value="MAJAN COLLEGE">MAJAN COLLEGE</option>
+                    <option value="MAZOON COLLEGE">MAZOON COLLEGE</option>
+                    <option value="MIDDLE EAST COLLEGE">
+                      MIDDLE EAST COLLEGE
+                    </option>
+                    <option value="MILITARY TECHNICAL COLLEGE">
+                      MILITARY TECHNICAL COLLEGE
+                    </option>
+                    <option value="MODERN COLLEGE OF BUSINESS & SCIENCE">
                       MODERN COLLEGE OF BUSINESS &amp; SCIENCE
                     </option>
-                    <option value="440">MUSCAT COLLEGE</option>
-                    <option value="19768">MUSCAT NURSING INSTITUTE</option>
-                    <option value="7343">MUSCAT UNIVERSITY </option>
-                    <option value="6245">MUSSANAH COLLEGE OF TECHNOLOGY</option>
-                    <option value="9222">NATIONAL SURVEY AUTHORITY</option>
-                    <option value="6143">NIZWA COLLEGE OF TECHNOLOGY</option>
-                    <option value="423">NIZWA UNIVERSITY</option>
-                    <option value="8170">
+                    <option value="MUSCAT COLLEGE">MUSCAT COLLEGE</option>
+                    <option value="MUSCAT NURSING INSTITUTE">
+                      MUSCAT NURSING INSTITUTE
+                    </option>
+                    <option value="MUSCAT UNIVERSITY">MUSCAT UNIVERSITY</option>
+                    <option value="MUSSANAH COLLEGE OF TECHNOLOGY">
+                      MUSSANAH COLLEGE OF TECHNOLOGY
+                    </option>
+                    <option value="NATIONAL SURVEY AUTHORITY">
+                      NATIONAL SURVEY AUTHORITY
+                    </option>
+                    <option value="NIZWA COLLEGE OF TECHNOLOGY">
+                      NIZWA COLLEGE OF TECHNOLOGY
+                    </option>
+                    <option value="NIZWA UNIVERSITY">NIZWA UNIVERSITY</option>
+                    <option value="NORTH BATINAH NURSING INSTITUTE">
                       NORTH BATINAH NURSING INSTITUTE
                     </option>
-                    <option value="3520">NURSING INSTITUTE</option>
-                    <option value="22669">
+                    <option value="NURSING INSTITUTE">NURSING INSTITUTE</option>
+                    <option value="National College of Automative Technology">
                       National College of Automative Technology
                     </option>
-                    <option value="18147">
-                      OMAN COLLEGE OF HEALTH SCIENCES{" "}
+                    <option value="OMAN COLLEGE OF HEALTH SCIENCES">
+                      OMAN COLLEGE OF HEALTH SCIENCES
                     </option>
-                    <option value="420">
+                    <option value="OMAN COLLEGE OF MANAGEMENT & TECHNOLOGY">
                       OMAN COLLEGE OF MANAGEMENT &amp; TECHNOLOGY
                     </option>
-                    <option value="1602">OMAN DENTAL COLLEGE</option>
-                    <option value="8148">
+                    <option value="OMAN DENTAL COLLEGE">
+                      OMAN DENTAL COLLEGE
+                    </option>
+                    <option value="OMAN HEALTH INFORMATION MANAGEMENT INSTITUTE">
                       OMAN HEALTH INFORMATION MANAGEMENT INSTITUTE
                     </option>
-                    <option value="437">OMAN MEDICAL COLLEGE</option>
-                    <option value="8171">OMAN PHARMACY INSTITUTE</option>
-                    <option value="8149">
+                    <option value="OMAN MEDICAL COLLEGE">
+                      OMAN MEDICAL COLLEGE
+                    </option>
+                    <option value="OMAN PHARMACY INSTITUTE">
+                      OMAN PHARMACY INSTITUTE
+                    </option>
+                    <option value="OMAN SPECIALIZED NURSING INSTITUTE">
                       OMAN SPECIALIZED NURSING INSTITUTE
                     </option>
-                    <option value="1517">OMAN TOURISM COLLEGE</option>
-                    <option value="8146">RUSTAQ NURSING INSTITUTE</option>
-                    <option value="8172">SAHAM VOCATIONAL COLLEGE</option>
-                    <option value="6144">SALALAH COLLEGE OF TECHNOLOGY</option>
-                    <option value="8167">SALALAH NURSING INSTITUTE</option>
-                    <option value="8155">SALALAH VOCATIONAL COLLEGE</option>
-                    <option value="419">SCIENTIFIC COLLEGE OF DESIGN</option>
-                    <option value="8153">SEEB VOCATIONAL COLLEGE</option>
-                    <option value="6244">SHINAS COLLEGE OF TECHNOLOGY</option>
-                    <option value="8173">SHINAS VOCATIONAL COLLEGE</option>
-                    <option value="8145">SOHAR NURSING INSTITUTE</option>
-                    <option value="430">SOHAR UNIVERSITY</option>
-                    <option value="8143">
+                    <option value="OMAN TOURISM COLLEGE">
+                      OMAN TOURISM COLLEGE
+                    </option>
+                    <option value="RUSTAQ NURSING INSTITUTE">
+                      RUSTAQ NURSING INSTITUTE
+                    </option>
+                    <option value="SAHAM VOCATIONAL COLLEGE">
+                      SAHAM VOCATIONAL COLLEGE
+                    </option>
+                    <option value="SALALAH COLLEGE OF TECHNOLOGY">
+                      SALALAH COLLEGE OF TECHNOLOGY
+                    </option>
+                    <option value="SALALAH NURSING INSTITUTE">
+                      SALALAH NURSING INSTITUTE
+                    </option>
+                    <option value="SALALAH VOCATIONAL COLLEGE">
+                      SALALAH VOCATIONAL COLLEGE
+                    </option>
+                    <option value="SCIENTIFIC COLLEGE OF DESIGN">
+                      SCIENTIFIC COLLEGE OF DESIGN
+                    </option>
+                    <option value="SEEB VOCATIONAL COLLEGE3">
+                      SEEB VOCATIONAL COLLEGE
+                    </option>
+                    <option value="SHINAS COLLEGE OF TECHNOLOGY">
+                      SHINAS COLLEGE OF TECHNOLOGY
+                    </option>
+                    <option value="SHINAS VOCATIONAL COLLEGE">
+                      SHINAS VOCATIONAL COLLEGE
+                    </option>
+                    <option value="SOHAR NURSING INSTITUTE">
+                      SOHAR NURSING INSTITUTE
+                    </option>
+                    <option value="SOHAR UNIVERSITY">SOHAR UNIVERSITY</option>
+                    <option value="SULTAN QABOOS ACADEMY FOR POLICE SCIENCES">
                       SULTAN QABOOS ACADEMY FOR POLICE SCIENCES
                     </option>
-                    <option value="8164">SULTAN QABOOS AIR ACADEMY</option>
-                    <option value="9223">SULTAN QABOOS AIR COMMAND</option>
-                    <option value="447">SULTAN QABOOS UNIVERSITY</option>
-                    <option value="8169">SUR NURSING INSTITUTE</option>
-                    <option value="436">SUR UNIVERSITY COLLEGE</option>
-                    <option value="8151">SUR VOCATIONAL COLLEGE</option>
-                    <option value="2424">TECHNICAL COLLEGE</option>
-                    <option value="19547">TEST UNIVERSITY</option>
-                    <option value="18256">
+                    <option value="SULTAN QABOOS AIR ACADEMY">
+                      SULTAN QABOOS AIR ACADEMY
+                    </option>
+                    <option value="SULTAN QABOOS AIR COMMAND">
+                      SULTAN QABOOS AIR COMMAND
+                    </option>
+                    <option value="SULTAN QABOOS UNIVERSITY">
+                      SULTAN QABOOS UNIVERSITY
+                    </option>
+                    <option value="SUR NURSING INSTITUTE">
+                      SUR NURSING INSTITUTE
+                    </option>
+                    <option value="SUR UNIVERSITY COLLEGE">
+                      SUR UNIVERSITY COLLEGE
+                    </option>
+                    <option value="SUR VOCATIONAL COLLEGE">
+                      SUR VOCATIONAL COLLEGE
+                    </option>
+                    <option value="TECHNICAL COLLEGE">TECHNICAL COLLEGE</option>
+                    <option value="TEST UNIVERSITY">TEST UNIVERSITY</option>
+                    <option value="THE HIGHER INSTITUTE FOR HEALTH SPECIALIZATIONS">
                       THE HIGHER INSTITUTE FOR HEALTH SPECIALIZATIONS
                     </option>
-                    <option value="446">
+                    <option value="WALJAT COLLEGE OF APPLIED SCIENCES">
                       WALJAT COLLEGE OF APPLIED SCIENCES
                     </option>
-                    <option value="20988">الكلية الفنية الصناعية</option>
-                    <option value="21869">الكلية الفنية الصناعية بابراء</option>
-                    <option value="13984">
+                    <option value="الكلية الفنية الصناعية">
+                      الكلية الفنية الصناعية
+                    </option>
+                    <option value="الكلية الفنية الصناعية بابراء">
+                      الكلية الفنية الصناعية بابراء
+                    </option>
+                    <option value="الكلية المتوسطة للمعلمات بالخوير">
                       الكلية المتوسطة للمعلمات بالخوير
                     </option>
-                    <option value="13985">
+                    <option value="الكلية المتوسطة للمعلمات بالرستاق">
                       الكلية المتوسطة للمعلمات بالرستاق
                     </option>
-                    <option value="13992">
+                    <option value="الكلية المتوسطة للمعلمات بعبري">
                       الكلية المتوسطة للمعلمات بعبري
                     </option>
-                    <option value="13986">
+                    <option value="الكلية المتوسطة للمعلمات بمسفط">
                       الكلية المتوسطة للمعلمات بمسفط
                     </option>
-                    <option value="13983">
+                    <option value="الكلية المتوسطة للمعلمات والمعلمين بصلالة">
                       الكلية المتوسطة للمعلمات والمعلمين بصلالة
                     </option>
-                    <option value="14542">
+                    <option value="الكلية المتوسطة للمعلمين بالرستاق">
                       الكلية المتوسطة للمعلمين بالرستاق
                     </option>
-                    <option value="13988">
+                    <option value="الكلية المتوسطة للمعلمين بالقرم">
                       الكلية المتوسطة للمعلمين بالقرم
                     </option>
-                    <option value="13991">
+                    <option value="الكلية المتوسطة للمعلمين بصحار">
                       الكلية المتوسطة للمعلمين بصحار
                     </option>
-                    <option value="13987">الكلية المتوسطة للمعلمين بصور</option>
-                    <option value="13989">
+                    <option value="الكلية المتوسطة للمعلمين بصور">
+                      الكلية المتوسطة للمعلمين بصور
+                    </option>
+                    <option value="الكلية المتوسطة للمعلمين بمسفط">
                       الكلية المتوسطة للمعلمين بمسفط
                     </option>
-                    <option value="13990">
+                    <option value="الكلية المتوسطة للمعلمين بنزوى">
                       الكلية المتوسطة للمعلمين بنزوى
                     </option>
-                    <option value="17871">كلية التربية بالرستاق</option>
-                    <option value="17872">كلية التربية بصحار</option>
-                    <option value="17874">كلية التربية بصلالة</option>
-                    <option value="17876">كلية التربية بصور</option>
-                    <option value="17873">كلية التربية بعبري</option>
-                    <option value="17875">كلية التربية بنزوى</option>
+                    <option value="كلية التربية بالرستاق">
+                      كلية التربية بالرستاق
+                    </option>
+                    <option value="كلية التربية بصحار">
+                      كلية التربية بصحار
+                    </option>
+                    <option value="كلية التربية بصلالة">
+                      كلية التربية بصلالة
+                    </option>
+                    <option value="كلية التربية بصور">كلية التربية بصور</option>
+                    <option value="كلية التربية بعبري">
+                      كلية التربية بعبري
+                    </option>
+                    <option value="كلية التربية بنزوى">
+                      كلية التربية بنزوى
+                    </option>
                   </select>
                 </div>
               </div>
@@ -1950,18 +2060,39 @@ class ApplicantForm extends Component {
                       Select Oman Region
                     </option>
 
-                    <option value="0">Select</option>
-                    <option value="10">AL Buraimi Governorate</option>
-                    <option value="8">Al wsta Governorate</option>
-                    <option value="5">Dahira Governorate</option>
-                    <option value="3">Dakhlia Governorate</option>
-                    <option value="6">Dhofar Governorate</option>
-                    <option value="4">Governorate of North Sharqia</option>
-                    <option value="2">Governorate of North Al Batinah </option>
-                    <option value="9">Governorate of South AL Batinah</option>
-                    <option value="11">Governorate of South Sharqia</option>
-                    <option value="7">Mosndam Governorate</option>
-                    <option value="1">Muscat Governorate</option>
+                    <option value="AL Buraimi Governorate">
+                      AL Buraimi Governorate
+                    </option>
+                    <option value="Al wsta Governorate">
+                      Al wsta Governorate
+                    </option>
+                    <option value="Dahira Governorate">
+                      Dahira Governorate
+                    </option>
+                    <option value="Dakhlia Governorate">
+                      Dakhlia Governorate
+                    </option>
+                    <option value="Dhofar Governorate">
+                      Dhofar Governorate
+                    </option>
+                    <option value="Governorate of North Sharqia">
+                      Governorate of North Sharqia
+                    </option>
+                    <option value="Governorate of North Al Batinah">
+                      Governorate of North Al Batinah
+                    </option>
+                    <option value="Governorate of South AL Batinah">
+                      Governorate of South AL Batinah
+                    </option>
+                    <option value="Governorate of South Sharqia">
+                      Governorate of South Sharqia
+                    </option>
+                    <option value="Mosndam Governorate">
+                      Mosndam Governorate
+                    </option>
+                    <option value="Muscat Governorate">
+                      Muscat Governorate
+                    </option>
                   </select>
                 </div>
               </div>
@@ -2029,14 +2160,14 @@ class ApplicantForm extends Component {
                     <option selected="selected" value="10">
                       Mother
                     </option>
-                    <option value="11">Son</option>
-                    <option value="6">Husband</option>
-                    <option value="2">Brother</option>
-                    <option value="3">Uncle</option>
-                    <option value="4">Daughter</option>
-                    <option value="5">Wife</option>
-                    <option value="12">Grandfather</option>
-                    <option value="13">Grandmother</option>
+                    <option value="Son">Son</option>
+                    <option value="Husband">Husband</option>
+                    <option value="Brother">Brother</option>
+                    <option value="Uncle">Uncle</option>
+                    <option value="Daughter">Daughter</option>
+                    <option value="Wife">Wife</option>
+                    <option value="Grandfather">Grandfather</option>
+                    <option value="Grandmother">Grandmother</option>
                   </select>
                 </div>
               </div>
@@ -2045,7 +2176,6 @@ class ApplicantForm extends Component {
               <div class="col s4">
                 <div className="input-field">
                   <label htmlFor="guardian-mobile">
-                    {" "}
                     Guardian Mobile Number In Oman
                   </label>
                   <input
