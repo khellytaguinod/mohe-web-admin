@@ -8,6 +8,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./form.css";
 
+import { createApplicationForm } from "../../store/actions/applicationFormActions";
+
 class ApplicantForm extends Component {
   state = {
     englishFirstName: "",
@@ -87,7 +89,8 @@ class ApplicantForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.signIn(this.state);
+    console.log("please work");
+    this.props.createApplicationForm(this.state);
   };
 
   changBday = date => {
@@ -126,9 +129,15 @@ class ApplicantForm extends Component {
     });
   };
 
+  // clickNextPage = () => {
+  //   console.log("please work");
+  //   this.props.createApplicationForm(this.state);
+  // };
+
   render() {
-    const { authError, auth } = this.props;
-    if (auth.uid) return <Redirect to="/" />;
+    const { auth } = this.props;
+
+    if (!auth.uid) return <Redirect to="/" />;
 
     console.log(this.state, "state here");
 
@@ -2342,7 +2351,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signIn: creds => dispatch(signIn(creds))
+    createApplicationForm: formDetails =>
+      dispatch(createApplicationForm(formDetails))
   };
 };
 
