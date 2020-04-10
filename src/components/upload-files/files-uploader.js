@@ -45,6 +45,16 @@ class FilesUploader extends Component {
     acknowledgementDocumentURL: "",
   };
 
+  state = {
+    yesToDeclaration: false,
+  };
+
+  setCheckbox = (e) => {
+    this.setState({
+      yesToDeclaration: e.target.checked,
+    });
+  };
+
   // passport photos handlers
 
   passportHandleUploadStart = () =>
@@ -209,7 +219,7 @@ class FilesUploader extends Component {
         <br />
         {this.state.passportPhotoURL && (
           <a href={this.state.passportPhotoURL} target="_blank">
-            View your document
+            Click to view your uploaded file
           </a>
         )}
         <br />
@@ -233,7 +243,7 @@ class FilesUploader extends Component {
         <br />
         {this.state.userPhotoURL && (
           <a href={this.state.userPhotoURL} target="_blank">
-            View your document
+            Click to view your uploaded file
           </a>
         )}
         <br />
@@ -256,7 +266,7 @@ class FilesUploader extends Component {
         <br />
         {this.state.academicReportURL && (
           <a href={this.state.academicReportURL} target="_blank">
-            View your document
+            Click to view your uploaded file
           </a>
         )}
         <br />
@@ -279,7 +289,7 @@ class FilesUploader extends Component {
         <br />
         {this.state.travelDetailsURL && (
           <a href={this.state.travelDetailsURL} target="_blank">
-            View your document
+            Click to view your uploaded file
           </a>
         )}
 
@@ -303,9 +313,38 @@ class FilesUploader extends Component {
         <br />
         {this.state.acknowledgementDocumentURL && (
           <a href={this.state.acknowledgementDocumentURL} target="_blank">
-            View your document
+            Click to view your uploaded file
           </a>
         )}
+        <br />
+        <br />
+        <div>
+          <label>
+            <input
+              onChange={this.setCheckbox.bind(this)}
+              type="checkbox"
+              class="filled-in"
+              checked={this.state.yesToDeclaration}
+            />
+            <span>
+              I take full responsibility that my qualification and my
+              transcripts is an exact copy of the original qualification
+              certificate and the above details are true and I accept all the
+              legal consequence in the event of proven conflict in what's given
+            </span>
+          </label>
+        </div>
+        <br />
+        <br />
+        {console.log(this.state.yesToDeclaration, "look here")}
+        <a
+          href="/"
+          class={`btn ${
+            this.state.yesToDeclaration !== false ? "" : "disabled"
+          }`}
+        >
+          Button
+        </a>
       </div>
     );
   }
