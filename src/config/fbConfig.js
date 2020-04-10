@@ -1,6 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from "firebase";
+import "firebase/app";
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -11,10 +10,12 @@ var firebaseConfig = {
   storageBucket: "mohe-web-admin.appspot.com",
   messagingSenderId: "660889962333",
   appId: "1:660889962333:web:240793a36cae55cf5f4ab4",
-  measurementId: "G-RH9GBLDFS9"
+  measurementId: "G-RH9GBLDFS9",
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.firestore().settings({ timestampsInSnapshots: true });
 
-export default firebase;
+const storage = firebase.storage();
+
+export { storage, firebase as default };
