@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -77,54 +77,54 @@ class ApplicantForm extends Component {
     guardianRelationship: "",
     guardianMobileNo: "",
     guardianWorkLoc: "",
-    guardianWorkNo: ""
+    guardianWorkNo: "",
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     console.log("please work");
     this.props.createApplicationForm(this.state);
   };
 
-  changBday = date => {
+  changBday = (date) => {
     this.setState({
-      birthDate: date
+      birthDate: date,
     });
   };
 
-  changeIdExpiryDate = date => {
+  changeIdExpiryDate = (date) => {
     this.setState({
-      idExpiryDate: date
+      idExpiryDate: date,
     });
   };
 
-  changepassportIssueDate = date => {
+  changepassportIssueDate = (date) => {
     this.setState({
-      passportIssueDate: date
+      passportIssueDate: date,
     });
   };
 
-  changepassportExpiryDate = date => {
+  changepassportExpiryDate = (date) => {
     this.setState({
-      passportExpiryDate: date
+      passportExpiryDate: date,
     });
   };
 
-  changestartDate = date => {
+  changestartDate = (date) => {
     this.setState({
-      startDate: date
+      startDate: date,
     });
   };
 
-  setRadio = e => {
+  setRadio = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
 
@@ -242,7 +242,7 @@ class ApplicantForm extends Component {
                 class="col s1"
                 style={{
                   height: "75px",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Birth Date
@@ -250,7 +250,7 @@ class ApplicantForm extends Component {
               <div
                 class="col s3"
                 style={{
-                  margin: "12px 0px 0px 0px"
+                  margin: "12px 0px 0px 0px",
                 }}
               >
                 <DatePicker
@@ -266,7 +266,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Nationality
@@ -487,7 +487,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Birth Place
@@ -831,7 +831,7 @@ class ApplicantForm extends Component {
                 class="col s3"
                 style={{
                   height: "75px",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 <div onChange={this.setRadio.bind(this)}>
@@ -871,7 +871,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Religion
@@ -898,7 +898,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Marital Status
@@ -939,7 +939,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 ID Expiry Date
@@ -947,7 +947,7 @@ class ApplicantForm extends Component {
               <div
                 class="col s4"
                 style={{
-                  margin: "12px 0px 0px 0px"
+                  margin: "12px 0px 0px 0px",
                 }}
               >
                 <DatePicker
@@ -975,7 +975,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Passport Issue Date
@@ -983,7 +983,7 @@ class ApplicantForm extends Component {
               <div
                 class="col s2"
                 style={{
-                  margin: "12px 0px 0px 0px"
+                  margin: "12px 0px 0px 0px",
                 }}
               >
                 <DatePicker
@@ -997,7 +997,7 @@ class ApplicantForm extends Component {
                 style={{
                   height: "75px",
                   textAlign: "center",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 Passport Expiry Date
@@ -1005,7 +1005,7 @@ class ApplicantForm extends Component {
               <div
                 class="col s2"
                 style={{
-                  margin: "12px 0px 0px 0px"
+                  margin: "12px 0px 0px 0px",
                 }}
               >
                 <DatePicker
@@ -1021,7 +1021,7 @@ class ApplicantForm extends Component {
                 class="col s1.5"
                 style={{
                   height: "75px",
-                  padding: "26px 0px 0px 0px"
+                  padding: "26px 0px 0px 0px",
                 }}
               >
                 HighSchool Certificate
@@ -2333,7 +2333,9 @@ class ApplicantForm extends Component {
             </div>
           </fieldset>
           <div className="input-field right-align">
-            <button className="btn pink lighten-1">Next Page</button>
+            <Link to="/upload-documents">
+              <button className="btn pink lighten-1">Next Page</button>
+            </Link>
           </div>
         </form>
       </div>
@@ -2341,17 +2343,17 @@ class ApplicantForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    createApplicationForm: formDetails =>
-      dispatch(createApplicationForm(formDetails))
+    createApplicationForm: (formDetails) =>
+      dispatch(createApplicationForm(formDetails)),
   };
 };
 

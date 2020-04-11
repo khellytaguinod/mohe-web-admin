@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 
+import { Redirect, Link } from "react-router-dom";
+
 import { connect } from "react-redux";
 
 import { submitApplicantUploadedData } from "../../store/actions/submittedApplicationActions";
@@ -209,9 +211,9 @@ class FilesUploader extends Component {
   };
 
   render() {
-    const { profile } = this.props;
-    console.log(profile);
+    const { auth, profile } = this.props;
 
+    if (!auth.uid) return <Redirect to="/" />;
     let randomNumbers = Math.floor(Math.random() * 8) + 1;
 
     let applicantFilesURL = {
@@ -224,7 +226,6 @@ class FilesUploader extends Component {
     };
 
     const handleSubmit = (e) => {
-      e.preventDefault();
       console.log("submitting uploaded data");
       this.props.submitApplicantUploadedData(applicantFilesURL);
     };
@@ -354,7 +355,7 @@ class FilesUploader extends Component {
             <input
               onChange={this.setCheckbox.bind(this)}
               type="checkbox"
-              class="filled-in"
+              className="filled-in"
               checked={this.state.yesToDeclaration}
             />
             <span>
@@ -367,16 +368,15 @@ class FilesUploader extends Component {
         </div>
         <br />
         <br />
-        {console.log(this.state.yesToDeclaration, "look here")}
-        <a
+        <Link
+          to="/"
           onClick={(e) => handleSubmit(e)}
-          href="/"
-          class={`btn ${
+          className={`btn ${
             this.state.yesToDeclaration !== false ? "" : "disabled"
           }`}
         >
-          Button
-        </a>
+          Go to Dashboard
+        </Link>
       </div>
     );
   }
