@@ -2,23 +2,23 @@ import React, { Component } from "react";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 
+import { connect } from "react-redux";
+
+import { submitApplicantUploadedData } from "../../store/actions/submittedApplicationActions";
+
 class FilesUploader extends Component {
-  // passportCopy
-  // userPhoto
-  // academicReport
-  // travel details in and out of country
-  // acknowledgement document
+  state = {
+    finalPassportPhotoURL: "",
+    finalUserPhotoURL: "",
+    finalAcademicReportURL: "",
+    finalTravelDetailsURL: "",
+    finalAcknowledgementDocumentURL: "",
+  };
 
   state = {
     passportIsUploading: false,
     passportUploadProcess: 0,
     passportPhotoURL: "",
-  };
-
-  state = {
-    userPhotoIsUploading: false,
-    userPhotoUploadProcess: 0,
-    userPhotoURL: "",
   };
 
   state = {
@@ -78,7 +78,9 @@ class FilesUploader extends Component {
       .ref("passport-copy")
       .child(filename)
       .getDownloadURL()
-      .then((url) => this.setState({ passportPhotoURL: url }));
+      .then((url) =>
+        this.setState({ passportPhotoURL: url, finalPassportPhotoURL: url })
+      );
   };
 
   //  user photo handlers
@@ -104,7 +106,9 @@ class FilesUploader extends Component {
       .ref("user-personal-photo")
       .child(filename)
       .getDownloadURL()
-      .then((url) => this.setState({ userPhotoURL: url }));
+      .then((url) =>
+        this.setState({ userPhotoURL: url, finalUserPhotoURL: url })
+      );
   };
 
   // academic report
@@ -133,7 +137,9 @@ class FilesUploader extends Component {
       .ref("academic-report")
       .child(filename)
       .getDownloadURL()
-      .then((url) => this.setState({ academicReportURL: url }));
+      .then((url) =>
+        this.setState({ academicReportURL: url, finalAcademicReportURL: url })
+      );
   };
 
   // travel details
@@ -162,7 +168,9 @@ class FilesUploader extends Component {
       .ref("trave-details")
       .child(filename)
       .getDownloadURL()
-      .then((url) => this.setState({ travelDetailsURL: url }));
+      .then((url) =>
+        this.setState({ travelDetailsURL: url, finalTravelDetailsURL: url })
+      );
   };
 
   // acknowledgement Document
@@ -192,20 +200,43 @@ class FilesUploader extends Component {
       .ref("acknowledgement-document")
       .child(filename)
       .getDownloadURL()
-      .then((url) => this.setState({ acknowledgementDocumentURL: url }));
+      .then((url) =>
+        this.setState({
+          acknowledgementDocumentURL: url,
+          finalAcknowledgementDocumentURL: url,
+        })
+      );
   };
 
   render() {
     const { profile } = this.props;
     console.log(profile);
+
+    let randomNumbers = Math.floor(Math.random() * 8) + 1;
+
+    let applicantFilesURL = {
+      applicantPassportURL: this.state.finalPassportPhotoURL,
+      applicantUserPhotoURL: this.state.finalUserPhotoURL,
+      applicantAcademicReportURL: this.state.finalAcademicReportURL,
+      applicantTravelDetailsURL: this.state.finalTravelDetailsURL,
+      applicantAcknowledgementDocURL: this.state
+        .finalAcknowledgementDocumentURL,
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log("submitting uploaded data");
+      this.props.submitApplicantUploadedData(applicantFilesURL);
+    };
+
     return (
       <div>
-        <label>Passport Copy:</label>
+        <label>Passport Copy lorem:</label>
 
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
-          filename={`${profile.firstName}-${profile.lastName}-passport-copy`}
+          filename={`${profile.firstName}-${profile.lastName}-passport-copy-${randomNumbers}`}
           storageRef={firebase.storage().ref("passport-copy")}
           onUploadStart={this.passportHandleUploadStart}
           onUploadError={this.passportHandleUploadError}
@@ -229,7 +260,7 @@ class FilesUploader extends Component {
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
-          filename={`${profile.firstName}-${profile.lastName}-user-personal-photo`}
+          filename={`${profile.firstName}-${profile.lastName}-user-personal-photo-${randomNumbers}`}
           storageRef={firebase.storage().ref("user-personal-photo")}
           onUploadStart={this.userPhotoHandleUploadStart}
           onUploadError={this.userPhotoHandleUploadError}
@@ -252,7 +283,7 @@ class FilesUploader extends Component {
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
-          filename={`${profile.firstName}-${profile.lastName}-academic-report`}
+          filename={`${profile.firstName}-${profile.lastName}-academic-report-${randomNumbers}`}
           storageRef={firebase.storage().ref("academic-report")}
           onUploadStart={this.academicReportHandleUploadStart}
           onUploadError={this.academicReportHandleUploadError}
@@ -275,7 +306,7 @@ class FilesUploader extends Component {
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
-          filename={`${profile.firstName}-${profile.lastName}-trave-details`}
+          filename={`${profile.firstName}-${profile.lastName}-trave-details-${randomNumbers}`}
           storageRef={firebase.storage().ref("trave-details")}
           onUploadStart={this.travelDetailsHandleUploadStart}
           onUploadError={this.travelDetailsHandleUploadError}
@@ -299,7 +330,7 @@ class FilesUploader extends Component {
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
-          filename={`${profile.firstName}-${profile.lastName}-acknowledgement-document`}
+          filename={`${profile.firstName}-${profile.lastName}-acknowledgement-document-${randomNumbers}`}
           storageRef={firebase.storage().ref("acknowledgement-document")}
           onUploadStart={this.acknowledgementDocumentHandleUploadStart}
           onUploadError={this.acknowledgementDocumentHandleUploadError}
@@ -338,6 +369,7 @@ class FilesUploader extends Component {
         <br />
         {console.log(this.state.yesToDeclaration, "look here")}
         <a
+          onClick={(e) => handleSubmit(e)}
           href="/"
           class={`btn ${
             this.state.yesToDeclaration !== false ? "" : "disabled"
@@ -350,4 +382,20 @@ class FilesUploader extends Component {
   }
 }
 
-export default FilesUploader;
+// export default FilesUploader;
+
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitApplicantUploadedData: (formDetails) =>
+      dispatch(submitApplicantUploadedData(formDetails)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilesUploader);

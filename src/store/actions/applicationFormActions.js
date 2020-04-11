@@ -1,4 +1,6 @@
-export const createApplicationForm = formDetails => {
+import { dateAndTime } from "../../utils";
+
+export const createApplicationForm = (formDetails) => {
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
@@ -10,12 +12,12 @@ export const createApplicationForm = formDetails => {
         authorFirstName: profile.firstName,
         authorLastName: profile.lastName,
         authorId: authorId,
-        createdAt: new Date().toString()
+        createdAt: dateAndTime(),
       })
       .then(() => {
         dispatch({ type: "CREATE_APPLICATION_FORM_SUCCESS" });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "CREATE_APPLICATION_FORM_ERROR" }, err);
       });
   };
