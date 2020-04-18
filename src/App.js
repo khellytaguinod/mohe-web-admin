@@ -7,7 +7,8 @@ import SignIn from "./components/auth/sign-in";
 import SignUp from "./components/auth/sign-up";
 import CreateProject from "./components/projects/CreateProject";
 import ApplicantForm from "./components/applicant-form/applicant-form";
-import UploadFiles from './components/upload-files/upload-documents'
+import UploadFiles from "./components/upload-files/upload-documents";
+import SuccessPage from "./pages/success-page";
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/create" component={CreateProject} />
             <Route path="/create-application" component={ApplicantForm} />
             <Route path="/upload-documents" component={UploadFiles} />
+            <Route path="/application-submit-success" component={SuccessPage} />
           </Switch>
         </div>
       </BrowserRouter>
