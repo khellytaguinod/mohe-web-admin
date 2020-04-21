@@ -140,6 +140,10 @@ class ApplicantForm extends Component {
 
     console.log(this.state, "state here");
 
+    let disabled = Object.values(this.state).every(
+      (o) => o !== "" && o !== null
+    );
+
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
@@ -1318,7 +1322,7 @@ class ApplicantForm extends Component {
               </div>
               <div class="col s3">
                 <div className="input-field">
-                  <labe>Choose Country for Bank</labe>
+                  <labe>Country of the bank</labe>
                   <select
                     class="browser-default"
                     id="bankCountry"
@@ -2334,11 +2338,14 @@ class ApplicantForm extends Component {
           </fieldset>
           <div className="input-field right-align">
             <Link to="/upload-documents">
-              <button className="btn pink lighten-1">Next Page</button>
+              <button disabled={!disabled} className="btn pink lighten-1">
+                Next Page
+              </button>
             </Link>
           </div>
         </form>
       </div>
+
     );
   }
 }
