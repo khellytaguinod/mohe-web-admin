@@ -8,7 +8,7 @@ export const submitApplicantUploadedData = (submittedDetails) => {
     const authorEmail = getState().firebase.auth.email;
     
     firestore
-      .collection("list-of-applications")
+      .collection("listOfApplications")
       .add({
         ...submittedDetails,
         userFirstName: profile.firstName,

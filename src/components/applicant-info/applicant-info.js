@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+import { db } from "../../config/fbConfig";
 
-import "firebase/app";
 import "./applicant-info.css";
 
 const dateFormat = require("dateformat");
@@ -12,6 +12,27 @@ const dateFormat = require("dateformat");
 const ApplicantInfo = (props) => {
   const { applicantInfo, auth } = props;
   if (!auth.uid) return <Redirect to="/sign-in" />;
+
+  const [applicantDocument, setApplicantDocument] = useState(null);
+
+  const getApplicantDocuments = (userId) => {
+    db.collection("listOfApplications")
+      .where("userId", "==", `${userId}`)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          console.log(doc.id, " => ", doc.data());
+          setApplicantDocument(doc.data());
+        });
+      })
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  };
+
+  useEffect(() => {
+    getApplicantDocuments(applicantInfo.authorId);
+  }, [applicantInfo.authorId]);
 
   const formatDate = (applicantInfo) => {
     let timestampToDate = applicantInfo.toDate();
@@ -24,7 +45,7 @@ const ApplicantInfo = (props) => {
       <div className="dashboard container">
         <div className="row row-style">
           <div className="col s12 m8">
-            <div className=" section">
+            <div className="section">
               <div className="card z-depth-0">
                 <div className="card-content">
                   <span className="card-title">
@@ -527,8 +548,88 @@ const ApplicantInfo = (props) => {
             </div>
           </div>
           <div className="col s12 m4">
-            <div className="card z-depth-0">
-              <p>Loading Applicant Details...</p>
+            <div className="section">
+              <div className="card z-depth-0">
+                <div className="card-content">
+                  <ul class="collection with-header">
+                    <li class="collection-header">
+                      <h6>Applicant Documents</h6>
+                    </li>
+                    <li className="collection-item">
+                      <div className="row row-style">
+                        <div className="col">
+                          <span className="table-label">
+                            <b>Passport Copy</b>
+                          </span>{" "}
+                          <br />
+                          {applicantDocument &&
+                            applicantDocument.applicantPassportURL && (
+                              <a
+                                href={applicantDocument.applicantPassportURL}
+                                target="_blank"
+                              >
+                                View passport copy
+                              </a>
+                            )}
+                          <br />
+                        </div>
+                        <div className="col">
+                          <span className="table-label">
+                            <b>Personal Photo</b>
+                          </span>{" "}
+                          <br />
+                          {applicantDocument &&
+                            applicantDocument.applicantUserPhotoURL && (
+                              <a
+                                href={applicantDocument.applicantUserPhotoURL}
+                                target="_blank"
+                              >
+                                View personal photo
+                              </a>
+                            )}
+                          <br />
+                        </div>
+                        <div className="col">
+                          <span className="table-label">
+                            <b>Travel Details</b>
+                          </span>{" "}
+                          <br />
+                          {applicantDocument &&
+                            applicantDocument.applicantTravelDetailsURL && (
+                              <a
+                                href={
+                                  applicantDocument.applicantTravelDetailsURL
+                                }
+                                target="_blank"
+                              >
+                                View travel details
+                              </a>
+                            )}
+                          <br />
+                        </div>
+                        <div className="col">
+                          <span className="table-label">
+                            <b>Acknowledgement Document</b>
+                          </span>{" "}
+                          <br />
+                          {applicantDocument &&
+                            applicantDocument.applicantAcknowledgementDocURL && (
+                              <a
+                                href={
+                                  applicantDocument.applicantAcknowledgementDocURL
+                                }
+                                target="_blank"
+                              >
+                                View acknowledgement document
+                              </a>
+                            )}
+                          <br />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -560,6 +661,7 @@ export default compose(
   firestoreConnect([
     {
       collection: "applicationForms",
+      collection: "listOfApplications",
     },
   ])
 )(ApplicantInfo);

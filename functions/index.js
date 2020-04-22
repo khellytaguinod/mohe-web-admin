@@ -137,7 +137,7 @@ const sendSuccessSubmittedForm = (email, displayName) => {
 };
 
 exports.applicantUploadedFiles = functions.firestore
-  .document("list-of-applications/{applicantId}")
+  .document("listOfApplications/{applicantId}")
   .onCreate((doc) => {
     const applicant = doc.data();
 
