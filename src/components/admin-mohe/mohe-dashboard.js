@@ -6,6 +6,8 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 
+import ManageAttache from "./manage-attache";
+
 class MOHEDashboard extends Component {
   render() {
     const { projects, auth, notifications } = this.props;
@@ -20,7 +22,8 @@ class MOHEDashboard extends Component {
             {/* <div>lorem</div> */}
           </div>
           <div className="col s12 m8">
-            <ApplicantInfo projects={projects} />
+            {/* <ApplicantInfo projects={projects} /> */}
+            <ManageAttache />
             {/* <div>lorem 2</div> */}
             {/* <Notifications notifications={notifications} /> */}
           </div>

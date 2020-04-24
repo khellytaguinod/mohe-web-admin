@@ -36,6 +36,75 @@ const createNotification = (notification) => {
     .then((doc) => console.log("Notification added", doc));
 };
 
+const createAttacheAuth = (attacheDetails) => {
+  return admin
+    .auth()
+    .createUser({
+      email: attacheDetails.email,
+      password: attacheDetails.password,
+      displayName: attacheDetails.user,
+    })
+    .then(function (userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully created new user:", userRecord.uid);
+    })
+    .catch(function (error) {
+      console.log("Error creating new user:", error);
+    });
+};
+
+exports.createAttache = functions.firestore
+  .document("attacheList/{attacheId}")
+  .onCreate((doc) => {
+    const attache = doc.data();
+    const attacheInfo = {
+      email: attache.attacheEmail,
+      password: attache.attachePass,
+      user: `${attache.firstName} ${attache.lastName}`,
+    };
+    return createAttacheAuth(attacheInfo);
+  });
+
+// Sends a welcome email to attache.
+const attacheWelcomeMail = (email, displayName, pass, country) => {
+  const APP_NAME = "MOHE-ECAES Web System";
+
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
+
+  mailOptions.subject = `Welcome to ${APP_NAME}!`;
+  mailOptions.text = `Welcome Attache ${displayName}! 
+  
+  Welcome to ${APP_NAME}. 
+  Your account was created by a MOHE admin.
+
+  You can use your email and login with ''' ${pass} ''' as your password to the system.
+  You will be managing applicants in your country ${country}.
+
+  Please go and login to https://mohe-web-admin.web.app/sign-in.
+
+  
+  This is an automated email. Please do not reply.
+  `;
+  mailTransport.sendMail(mailOptions);
+  console.log("New welcome email sent to:", email);
+  return null;
+};
+
+exports.attacheCreatedEmailNotification = functions.firestore
+  .document("attacheList/{attacheId}")
+  .onCreate((doc) => {
+    const attache = doc.data();
+
+    const email = attache.attacheEmail;
+    const name = `${attache.firstName} ${attache.lastName}`;
+    const pass = attache.attachePass;
+    const country = attache.country;
+    return attacheWelcomeMail(email, name, pass, country);
+  });
+
 exports.projectCreated = functions.firestore
   .document("projects/{projectId}")
   .onCreate((doc, context) => {
@@ -43,7 +112,6 @@ exports.projectCreated = functions.firestore
     const notification = {
       content: "Added a new project",
       user: `${project.authorFirstName} ${project.authorLastName}`,
-      // time: admin.firestore.FieldValue.serverTimestamp()
       time: dateAndTimeNow,
     };
 
@@ -72,8 +140,6 @@ exports.userJoined = functions.firestore
       content: "was created in the system",
       user: `${user.firstName} ${user.lastName}`,
       time: dateAndTimeNow,
-
-      // time: admin.firestore.FieldValue.serverTimestamp()
     };
     return createNotification(notification);
   });
