@@ -386,7 +386,7 @@ class FilesUploader extends Component {
         <br />
         <br />
         <Link
-          to="/"
+          to="/application-submit-success"
           onClick={(e) => handleSubmit(e)}
           // disabled={!disabled}
           // className={`btn ${
