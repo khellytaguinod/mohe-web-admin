@@ -22,7 +22,7 @@ export const signOut = () => {
       .auth()
       .signOut()
       .then(() => {
-        dispatch({ type: "SIGNOUT_SUCCESS" });
+        dispatch({ type: "SIGN_OUT_SUCCESS" });
       });
   };
 };

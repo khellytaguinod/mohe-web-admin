@@ -9,38 +9,29 @@ class SignUp extends Component {
     password: "",
     firstName: "",
     lastName: "",
-    userType: ""
+    userType: "",
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     console.log(this.state, "state here");
     e.preventDefault();
     this.props.signUp(this.state);
   };
 
-  // isDisabled = () => {
-  //   if (
-  //     this.state.email.length &&
-  //     this.state.firstName.length &&
-  //     this.state.lastName.length &&
-  //     this.state.password.length &&
-  //     this.state.userType.length === 0
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
-
   render() {
     const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to="/create-application" />;
+
+    let disabled = Object.values(this.state).every(
+      (o) => o !== "" && o !== null
+    );
+
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
@@ -80,7 +71,7 @@ class SignUp extends Component {
           </div>
           <div className="input-field">
             <button
-              // disabled={this.disabled}
+              disabled={!disabled}
               className="btn pink lighten-1 z-depth-0"
             >
               Sign Up
@@ -95,16 +86,16 @@ class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
-    authError: state.auth.authError
+    authError: state.auth.authError,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    signUp: creds => dispatch(signUp(creds))
+    signUp: (creds) => dispatch(signUp(creds)),
   };
 };
 

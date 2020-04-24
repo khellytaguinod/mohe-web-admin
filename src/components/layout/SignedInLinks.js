@@ -7,13 +7,13 @@ const SignedInLinks = props => {
   return (
     <div>
       <ul className="right">
-        <li>
+        {/* <li>
           <NavLink to="/create">New Project</NavLink>
-        </li>
+        </li> */}
         <li>
           <a onClick={props.signOut}>Log Out</a>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/" className="btn btn-floating pink lighten-1">
             {props.profile.initials}
           </NavLink>
@@ -24,7 +24,7 @@ const SignedInLinks = props => {
                 props.profile.userType.toUpperCase().replace(/-/g, " ")}
             </b>
           </span>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
