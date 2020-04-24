@@ -213,6 +213,10 @@ class FilesUploader extends Component {
   render() {
     const { auth, profile } = this.props;
 
+    let disabled = Object.values(this.state).every(
+      (o) => o !== "" && o !== null
+    );
+
     if (!auth.uid) return <Redirect to="/" />;
     let randomNumbers = Math.floor(Math.random() * 8) + 1;
 
@@ -232,7 +236,9 @@ class FilesUploader extends Component {
 
     return (
       <div>
-        <label>Passport Copy lorem:</label>
+        <label>
+          <b>Passport Copy: </b>
+        </label>
 
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
@@ -256,7 +262,9 @@ class FilesUploader extends Component {
         )}
         <br />
         <br />
-        <label>Personal Photo:</label>
+        <label>
+          <b>Personal Photo: </b>
+        </label>
 
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
@@ -280,7 +288,9 @@ class FilesUploader extends Component {
         )}
         <br />
         <br />
-        <label>Academic Report:</label>
+        <label>
+          <b>Academic Report: </b>
+        </label>
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
@@ -303,7 +313,9 @@ class FilesUploader extends Component {
         )}
         <br />
         <br />
-        <label>Travel Details</label>
+        <label>
+          <b>Travel Details: </b>
+        </label>
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
@@ -327,7 +339,9 @@ class FilesUploader extends Component {
 
         <br />
         <br />
-        <label>acknowledgement Document</label>
+        <label>
+          <b>Acknowledgement Document: </b>
+        </label>
         <FileUploader
           accept="image/jpeg,image/png,application/pdf,.doc, .docx"
           name="avatar"
@@ -350,6 +364,9 @@ class FilesUploader extends Component {
         )}
         <br />
         <br />
+        <label>
+          <b>Declaration: </b>
+        </label>
         <div>
           <label>
             <input
@@ -371,11 +388,17 @@ class FilesUploader extends Component {
         <Link
           to="/"
           onClick={(e) => handleSubmit(e)}
-          className={`btn ${
-            this.state.yesToDeclaration !== false ? "" : "disabled"
-          }`}
+          // disabled={!disabled}
+          // className={`btn ${
+          //   this.state.yesToDeclaration !== false ? "" : "disabled"
+          // }`}
         >
-          Go to Dashboard
+          <button
+            disabled={this.state.yesToDeclaration !== true}
+            className="btn pink lighten-1 z-depth-0"
+          >
+            Submit Application
+          </button>
         </Link>
       </div>
     );

@@ -13,21 +13,27 @@ class UploadFiles extends Component {
     const { profile } = this.props;
     return (
       <div className="container white">
-        <h5 className="grey-text text-darken-3" style={{ textAlign: "center" }}>
-          Upload Files Attachments
-        </h5>
+        <div style={{ padding: "15px 60px" }}>
+          <h5
+            className="grey-text text-darken-3"
+            style={{ textAlign: "center" }}
+          >
+            Upload Files Attachments
+          </h5>
 
-        <div>
-          <fieldset>
-            <legend>Important Reminders</legend>
-            <p>Only accepted documents doc docx</p>
-            <p>The file name must not consist of any symbols such as (! @ )</p>
-          </fieldset>
+          <div>
+            <fieldset>
+              <legend>Important Reminders</legend>
+              <p>Only accepted documents are .jpg .jpeg .png .doc .docx .pdf</p>
+              <p>File name must be english.</p>
+              <p>Maximum file size is 5mb only.</p>
+            </fieldset>
+          </div>
+
+          <br />
+          <FilesUploader profile={profile} />
+          <br />
         </div>
-
-        <br />
-        <FilesUploader profile={profile} />
-        <br />
       </div>
     );
   }

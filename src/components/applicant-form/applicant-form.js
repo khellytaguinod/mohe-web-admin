@@ -2283,10 +2283,8 @@ class ApplicantForm extends Component {
                       Choose Guardian Relationship
                     </option>
 
-                    <option value="9">Father</option>
-                    <option selected="selected" value="10">
-                      Mother
-                    </option>
+                    <option value="Father">Father</option>
+                    <option value="Mother">Mother</option>
                     <option value="Son">Son</option>
                     <option value="Husband">Husband</option>
                     <option value="Brother">Brother</option>
@@ -2345,7 +2343,6 @@ class ApplicantForm extends Component {
           </div>
         </form>
       </div>
-
     );
   }
 }
