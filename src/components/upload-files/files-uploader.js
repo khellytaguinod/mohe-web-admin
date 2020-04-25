@@ -51,9 +51,19 @@ class FilesUploader extends Component {
     yesToDeclaration: false,
   };
 
+  state = {
+    isUploadingDocument: false,
+  };
+
   setCheckbox = (e) => {
     this.setState({
       yesToDeclaration: e.target.checked,
+    });
+  };
+
+  setUploadingDoc = () => {
+    this.setState({
+      isUploadingDocument: true,
     });
   };
 
@@ -211,11 +221,9 @@ class FilesUploader extends Component {
   };
 
   render() {
-    const { auth, profile } = this.props;
+    const { auth, profile, uploadingDocDone, uploadingDocFailed } = this.props;
 
-    let disabled = Object.values(this.state).every(
-      (o) => o !== "" && o !== null
-    );
+    if (uploadingDocDone) return <Redirect to="/application-submit-success" />;
 
     if (!auth.uid) return <Redirect to="/" />;
     let randomNumbers = Math.floor(Math.random() * 8) + 1;
@@ -229,8 +237,12 @@ class FilesUploader extends Component {
         .finalAcknowledgementDocumentURL,
     };
 
+    let disabledBtn = Object.values(applicantFilesURL).every(
+      (o) => o !== undefined
+    );
+
     const handleSubmit = (e) => {
-      console.log("submitting uploaded data");
+      e.preventDefault();
       this.props.submitApplicantUploadedData(applicantFilesURL);
     };
 
@@ -385,21 +397,38 @@ class FilesUploader extends Component {
         </div>
         <br />
         <br />
-        <Link
-          to="/application-submit-success"
-          onClick={(e) => handleSubmit(e)}
-          // disabled={!disabled}
-          // className={`btn ${
-          //   this.state.yesToDeclaration !== false ? "" : "disabled"
-          // }`}
+        {/* <Link
+          to="/upload-documents"
+          onClick={(e) => handleSubmit(e)} 
+          disabled={!disabled}
+          className={`btn ${
+            this.state.yesToDeclaration !== false ? "" : "disabled"
+          }`}
+        > */}
+        <button
+          onClick={(e) => {
+            this.setUploadingDoc();
+            handleSubmit(e);
+          }}
+          //  onChange={this.setCheckbox.bind(this)}
+          disabled={
+            disabledBtn === false || this.state.yesToDeclaration !== true
+          }
+          className="btn pink lighten-1 z-depth-0"
         >
-          <button
-            disabled={this.state.yesToDeclaration !== true}
-            className="btn pink lighten-1 z-depth-0"
-          >
-            Submit Application
-          </button>
-        </Link>
+          {console.log(this.state.isUploadingDocument, "submiting huhu")}
+          {this.state.isUploadingDocument == true
+            ? "Uploading Documents"
+            : "Submit Application"}
+          {/* Submit Application */}
+        </button>
+        {/* </Link> */}
+        <div className="center red-text">
+          {uploadingDocFailed ? <p>{uploadingDocFailed}</p> : null}
+        </div>
+        <div className="center green-text">
+          {uploadingDocDone ? <p>{uploadingDocDone}</p> : null}
+        </div>
       </div>
     );
   }
@@ -411,6 +440,8 @@ const mapStateToProps = (state) => {
   return {
     authError: state.auth.authError,
     auth: state.firebase.auth,
+    uploadingDocDone: state.uploadDocument.successMsg,
+    uploadingDocFailed: state.uploadDocument.failedMsg,
   };
 };
 

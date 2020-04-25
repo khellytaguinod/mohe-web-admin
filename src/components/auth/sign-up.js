@@ -26,7 +26,7 @@ class SignUp extends Component {
 
   render() {
     const { auth, authError } = this.props;
-    if (auth.uid) return <Redirect to="/create-application" />;
+    if (auth.uid) return <Redirect to="/" />;
 
     let disabled = Object.values(this.state).every(
       (o) => o !== "" && o !== null

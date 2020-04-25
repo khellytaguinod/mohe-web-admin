@@ -87,7 +87,7 @@ class ApplicantForm extends Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log("please work");
     this.props.createApplicationForm(this.state);
   };
@@ -128,11 +128,6 @@ class ApplicantForm extends Component {
     });
   };
 
-  // clickNextPage = () => {
-  //   console.log("please work");
-  //   this.props.createApplicationForm(this.state);
-  // };
-
   render() {
     const { auth } = this.props;
 
@@ -146,7 +141,7 @@ class ApplicantForm extends Component {
 
     return (
       <div className="container">
-        <form className="white" onSubmit={this.handleSubmit}>
+        <form className="white">
           <h5
             className="grey-text text-darken-3"
             style={{ textAlign: "center" }}
@@ -2335,7 +2330,7 @@ class ApplicantForm extends Component {
             </div>
           </fieldset>
           <div className="input-field right-align">
-            <Link to="/upload-documents">
+            <Link to="/upload-documents" onClick={this.handleSubmit}>
               <button disabled={!disabled} className="btn pink lighten-1">
                 Next Page
               </button>
