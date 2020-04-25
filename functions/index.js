@@ -37,20 +37,38 @@ const createNotification = (notification) => {
 };
 
 const createAttacheAuth = (attacheDetails) => {
-  return admin
-    .auth()
-    .createUser({
-      email: attacheDetails.email,
-      password: attacheDetails.password,
-      displayName: attacheDetails.user,
-    })
-    .then(function (userRecord) {
-      // See the UserRecord reference doc for the contents of userRecord.
-      console.log("Successfully created new user:", userRecord.uid);
-    })
-    .catch(function (error) {
-      console.log("Error creating new user:", error);
-    });
+  return (
+    admin
+      .auth()
+      .createUser({
+        email: attacheDetails.email,
+        password: attacheDetails.password,
+        displayName: attacheDetails.user,
+      })
+      // .then(function (userRecord) {
+      //   // See the UserRecord reference doc for the contents of userRecord.
+      //   console.log("Successfully created new user:", userRecord.uid);
+      // })
+
+      .then((userRecord) => {
+        return admin
+          .firestore()
+          .collection("users")
+          .doc(userRecord.uid)
+          .set({
+            firstName: attacheDetails.firstName,
+            lastName: attacheDetails.lastName,
+            initials: attacheDetails.firstName[0] + attacheDetails.lastName[0],
+            userType: "attache",
+            userEmail: attacheDetails.email,
+            country: attacheDetails.country,
+          });
+      })
+
+      .catch(function (error) {
+        console.log("Error creating new user:", error);
+      })
+  );
 };
 
 exports.createAttache = functions.firestore
@@ -58,9 +76,12 @@ exports.createAttache = functions.firestore
   .onCreate((doc) => {
     const attache = doc.data();
     const attacheInfo = {
+      firstName: attache.firstName,
+      lastName: attache.lastName,
       email: attache.attacheEmail,
       password: attache.attachePass,
       user: `${attache.firstName} ${attache.lastName}`,
+      country: attache.country,
     };
     return createAttacheAuth(attacheInfo);
   });
