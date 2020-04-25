@@ -47,3 +47,6 @@ android/
 ios/
 
 .firebase
+
+# my firebase config api keys
+fbConfig.js
