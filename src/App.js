@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
 import MOHEDashboard from "./components/admin-mohe/mohe-dashboard";
+import AttacheDashboard from "./components/attache-dashboard/attache-dashboard";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import SignIn from "./components/auth/sign-in";
 import SignUp from "./components/auth/sign-up";
@@ -20,7 +21,12 @@ class App extends Component {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Dashboard} />
-            <Route exact path="/dashboard" component={MOHEDashboard} />
+            <Route exact path="/mohe-dashboard" component={MOHEDashboard} />
+            <Route
+              exact
+              path="/attache-dashboard"
+              component={AttacheDashboard}
+            />
             <Route path="/project/:id" component={ProjectDetails} />
             <Route path="/applicant/:id" component={ApplicantInfo} />
             <Route path="/sign-in" component={SignIn} />

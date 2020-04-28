@@ -632,6 +632,16 @@ const ApplicantInfo = (props) => {
               </div>
             </div>
           </div>
+          <div className="col s12 m4">
+            <div className="section">
+              <div className="card z-depth-0">
+                <div className="card-content">
+                  <span>Application Status:</span>
+                  {/* {applicantDocument.isVerified === null ? '' : ''} */}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

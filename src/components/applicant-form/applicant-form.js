@@ -2330,7 +2330,11 @@ class ApplicantForm extends Component {
             </div>
           </fieldset>
           <div className="input-field right-align">
-            <Link to="/upload-documents" onClick={this.handleSubmit}>
+            <Link
+              to="/upload-documents"
+              onClick={this.handleSubmit}
+              className={!disabled ? "disabled" : ""}
+            >
               <button disabled={!disabled} className="btn pink lighten-1">
                 Next Page
               </button>

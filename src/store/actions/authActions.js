@@ -45,6 +45,7 @@ export const signUp = (newUser) => {
             initials: newUser.firstName[0] + newUser.lastName[0],
             userType: newUser.userType,
             userEmail: newUser.email,
+            applicationStatus: "Unsubmitted",
           });
       })
       .then(() => {

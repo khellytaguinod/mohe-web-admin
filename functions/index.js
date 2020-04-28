@@ -140,7 +140,7 @@ exports.projectCreated = functions.firestore
   });
 
 exports.applicationCreatedLogger = functions.firestore
-  .document("application-forms/{applicantFormId}")
+  .document("applicationForms/{applicantFormId}")
   .onCreate((doc) => {
     const user = doc.data();
 

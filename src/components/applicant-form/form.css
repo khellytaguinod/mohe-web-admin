@@ -28,3 +28,7 @@ label {
 .input-field > label {
   color: #424242 !important;
 }
+
+.disabled {
+  pointer-events: none;
+}

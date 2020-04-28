@@ -6,9 +6,10 @@ export const createApplicationForm = (formDetails) => {
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
     firestore
-      .collection("application-forms")
+      .collection("applicationForms")
       .add({
         ...formDetails,
+        isVerified: null,
         authorFirstName: profile.firstName,
         authorLastName: profile.lastName,
         authorId: authorId,
