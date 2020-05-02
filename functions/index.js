@@ -145,7 +145,7 @@ exports.applicationCreatedLogger = functions.firestore
     const user = doc.data();
 
     const notification = {
-      content: "An applicant submitted a user information",
+      content: "submitted an applicant form",
       user: `${user.authorFirstName} ${user.authorLastName}`,
       time: dateAndTimeNow,
     };
@@ -158,7 +158,7 @@ exports.userJoined = functions.firestore
   .onCreate((doc) => {
     const user = doc.data();
     const notification = {
-      content: "was created in the system",
+      content: "was registered in the system",
       user: `${user.firstName} ${user.lastName}`,
       time: dateAndTimeNow,
     };

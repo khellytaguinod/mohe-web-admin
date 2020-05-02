@@ -414,6 +414,11 @@ class ManageAttache extends Component {
               <div className="center green-text">
                 {createAccountSuccess ? <p>{createAccountSuccess}</p> : null}
               </div>
+              {createAccountSuccess ? (
+                <div className="center green-text">
+                  <p>Attache Login Credentials Will Be Sent From Email</p>
+                </div>
+              ) : null}
             </div>
           </form>
         </div>

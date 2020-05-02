@@ -369,10 +369,10 @@ const ApplicantInfo = (props) => {
                         </div>
                         <div className="col">
                           <span className="table-label">
-                            <b>Collage</b>
+                            <b>College</b>
                           </span>{" "}
                           <br />
-                          <span>{applicantInfo.collage}</span> <br />
+                          <span>{applicantInfo.college}</span> <br />
                         </div>
                       </div>
                     </li>

@@ -17,7 +17,6 @@ const ApplicantInfo = ({ applicantInfoFull, country }) => {
               return (
                 <li class="collection-item">
                   <span>
-                    Applicant:{"  "}
                     <b>
                       {applicantInfo.value.englishFirstName}
                       {applicantInfo.value.englishLastName}

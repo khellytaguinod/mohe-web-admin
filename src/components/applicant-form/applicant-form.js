@@ -57,7 +57,7 @@ class ApplicantForm extends Component {
     studyLevel: "",
     studyMode: "",
     university: "",
-    collage: "",
+    college: "",
     mainMajor: "",
     subMajor: "",
     certificate: "",
@@ -2067,10 +2067,10 @@ class ApplicantForm extends Component {
               </div>
               <div class="col s3">
                 <div className="input-field">
-                  <label htmlFor="collage">Collage</label>
+                  <label htmlFor="college">College</label>
                   <input
                     type="text"
-                    id="collage"
+                    id="college"
                     onChange={this.handleChange}
                   />
                 </div>

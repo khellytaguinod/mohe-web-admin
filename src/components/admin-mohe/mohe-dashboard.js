@@ -10,7 +10,7 @@ import Notifications from "../dashboard/Notifications";
 import ManageAttache from "./manage-attache";
 
 const MOHEDashboard = (props) => {
-  const { profile, auth, notifications, projects } = props;
+  const { profile, auth, notifications, applicantList } = props;
   if (!auth.uid) return <Redirect to="/sign-in" />;
 
   const [selectedTab, setSelectedTab] = useState("ApplicantTab");
@@ -25,7 +25,7 @@ const MOHEDashboard = (props) => {
         </div>
         <div className="col s12 m8">
           {selectedTab === "ApplicantTab" ? (
-            <ApplicantInfo projects={projects} />
+            <ApplicantInfo applicantList={applicantList} />
           ) : null}
           {selectedTab === "AttacheTab" ? <ManageAttache /> : null}
           {selectedTab === "SystemLogsTab" ? (
@@ -39,7 +39,7 @@ const MOHEDashboard = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    projects: state.firestore.ordered.applicationForms,
+    applicantList: state.firestore.ordered.applicationForms,
     auth: state.firebase.auth,
     notifications: state.firestore.ordered.notifications,
     profile: state.firebase.profile,
