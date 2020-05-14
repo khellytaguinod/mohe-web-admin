@@ -4,16 +4,36 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import { db } from "../../config/fbConfig";
+import { Link } from "react-router-dom";
 
 import "./applicant-info.css";
+
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
+
+import { addToVerificationList } from "../../store/actions/add-to-attache-approval";
 
 const dateFormat = require("dateformat");
 
 const ApplicantInfo = (props) => {
-  const { applicantInfo, auth } = props;
+  const { applicantInfo, auth, addToVerificationList } = props;
   if (!auth.uid) return <Redirect to="/sign-in" />;
 
   const [applicantDocument, setApplicantDocument] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSubmit = (e) => {
+    const applicantDetails = {
+      applicantName: `${applicantInfo.englishFirstName} ${applicantInfo.englishLastName}`,
+      applicantCountry: applicantInfo.birthPlace,
+      applicantEmail: applicantInfo.applicantEmail,
+      applicantStatus: "attache-approval",
+    };
+
+    console.log(applicantDetails, "state here");
+    e.preventDefault();
+    addToVerificationList(applicantDetails);
+  };
 
   const getApplicantDocuments = (userId) => {
     db.collection("listOfApplications")
@@ -636,13 +656,63 @@ const ApplicantInfo = (props) => {
             <div className="section">
               <div className="card z-depth-0">
                 <div className="card-content">
-                  <span>Application Status:</span>
-                  {/* {applicantDocument.isVerified === null ? '' : ''} */}
+                  <span>Application Status: </span>
+                  <br />
+                  {applicantDocument && applicantDocument.isVerified ? (
+                    ""
+                  ) : (
+                    <div>
+                      <p>
+                        <b className="not-verified">Not yet verified </b>{" "}
+                        <b>by an Attaché</b>
+                      </p>
+                      <br />
+                      <a
+                        class="waves-effect waves-light btn"
+                        onClick={() => setShowModal(!showModal)}
+                      >
+                        Request Verification
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Modal open={showModal} onClose={() => setShowModal(!showModal)} center>
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>Forward application?</h4>
+            </li>
+            <li class="collection-item">
+              <div>
+                <p>
+                  This application will now be forwarded to the attache of{" "}
+                  <b>{applicantInfo.birthPlace}.</b> This will be view and will
+                  verify by the attache if the applicant details and documents
+                  are all true and legal.
+                </p>
+                <br />
+                <button
+                  className="btn pink lighten-1 z-depth-0"
+                  onClick={() => setShowModal(!showModal)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="waves-effect waves-light btn forward-btn"
+                  style={{ float: "right" }}
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  <Link to={`/mohe-application-forwarded-success`}>
+                    Send Application For Verification
+                  </Link>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </Modal>
       </div>
     );
   } else {
@@ -666,8 +736,15 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToVerificationList: (applicantDetails) =>
+      dispatch(addToVerificationList(applicantDetails)),
+  };
+};
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
     {
       collection: "applicationForms",

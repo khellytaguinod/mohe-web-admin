@@ -12,6 +12,7 @@ export const createApplicationForm = (formDetails) => {
         isVerified: null,
         authorFirstName: profile.firstName,
         authorLastName: profile.lastName,
+        applicantEmail: profile.userEmail,
         authorId: authorId,
         createdAt: dateAndTime(),
       })

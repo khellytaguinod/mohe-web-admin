@@ -98,16 +98,16 @@ const attacheWelcomeMail = (email, displayName, pass, country) => {
   mailOptions.subject = `Welcome to ${APP_NAME}!`;
   mailOptions.text = `Welcome Attache ${displayName}! 
   
-  Welcome to ${APP_NAME}. 
-  Your account was created by a MOHE admin.
+Welcome to ${APP_NAME}. 
+Your account was created by a MOHE admin.
 
-  You can use your email and login with ''' ${pass} ''' as your password to the system.
-  You will be managing applicants in your country ${country}.
+You can use your email and login with ''' ${pass} ''' as your password to the system.
+You will be managing applicants in your country ${country}.
 
-  Please go and login to https://mohe-web-admin.web.app/sign-in.
+Please go and login to https://mohe-web-admin.web.app/sign-in.
 
   
-  This is an automated email. Please do not reply.
+This is an automated email. Please do not reply.
   `;
   mailTransport.sendMail(mailOptions);
   console.log("New welcome email sent to:", email);
@@ -177,10 +177,10 @@ const sendWelcomeEmail = (email, displayName) => {
   mailOptions.subject = `Welcome to ${APP_NAME}!`;
   mailOptions.text = `Hey ${displayName}! 
   
-  Welcome to ${APP_NAME}. 
-  Thank you for registering your account. Please continue the required forms so your application can be review and verify.
+Welcome to ${APP_NAME}. 
+Thank you for registering your account. Please continue the required forms so your application can be review and verify.
   
-  This is an automated email. Please do not reply.
+This is an automated email. Please do not reply.
   `;
   mailTransport.sendMail(mailOptions);
   console.log("New welcome email sent to:", email);
@@ -206,13 +206,12 @@ const sendSuccessSubmittedForm = (email, displayName) => {
     to: email,
   };
 
-  // The user subscribed to the newsletter.
   mailOptions.subject = `Application status you submitted to ${APP_NAME}`;
   mailOptions.text = `Good Day Applicant 
-  ${displayName}
+${displayName}
   
   
-  You are receiving this email to informed you that you successfully submitted your application. Your application is now being process and being reviewed by Ministry of Educ Abroad. Please wait for updates and for further instructions.
+You are receiving this email to informed you that you successfully submitted your application. Your application is now being process and being reviewed by Ministry of Educ Abroad. Please wait for updates and for further instructions.
   
   MOHE-ECAES Web System.
   This is an automated email. Please do not reply.
@@ -231,4 +230,39 @@ exports.applicantUploadedFiles = functions.firestore
     const email = applicant.userEmail;
     const name = `${applicant.userFirstName} ${applicant.userLastName}`;
     return sendSuccessSubmittedForm(email, name);
+  });
+
+// Send a notification to the applicant that the application was forwarded to attache
+const sendEmailApplicantNotification = (email, displayName, country) => {
+  const APP_NAME = "MOHE-ECAES Web System";
+
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
+
+  mailOptions.subject = `Update about the application you submitted Applicant ${displayName}`;
+  mailOptions.text = `Good Day Applicant 
+${displayName}
+  
+You are receiving this email to informed you that the application you submitted was viewed and now being forwarded to the ${country} Attaché. This is to verify that the details you submitted and real and legal. Please wait for further instructions.
+  
+  MOHE-ECAES Web System.
+  This is an automated email. Please do not reply.
+  `;
+
+  mailTransport.sendMail(mailOptions);
+  console.log("A notification email was sent to:", email);
+  return null;
+};
+
+exports.applicantUploadedFiles = functions.firestore
+  .document("attacheVerificationList/{attacheVerificationListId}")
+  .onCreate((doc) => {
+    const applicant = doc.data();
+
+    const email = applicant.applicantEmail;
+    const name = applicant.applicantName;
+    const country = applicant.applicantCountry;
+    return sendEmailApplicantNotification(email, name, country);
   });

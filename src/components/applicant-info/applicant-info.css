@@ -5,3 +5,11 @@
 .row-style {
   margin-bottom: 0px;
 }
+
+.not-verified {
+  color: #ffa726;
+}
+
+.forward-btn > a {
+  color: white;
+}

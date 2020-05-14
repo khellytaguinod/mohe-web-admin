@@ -12,6 +12,7 @@ import ApplicantForm from "./components/applicant-form/applicant-form";
 import UploadFiles from "./components/upload-files/upload-documents";
 import ApplicantInfo from "./components/applicant-info/applicant-info";
 import SuccessPage from "./pages/success-page";
+import MoheForwardSuccessPage from "./components/admin-mohe/success-page/success-page";
 
 class App extends Component {
   render() {
@@ -35,6 +36,10 @@ class App extends Component {
             <Route path="/create-application" component={ApplicantForm} />
             <Route path="/upload-documents" component={UploadFiles} />
             <Route path="/application-submit-success" component={SuccessPage} />
+            <Route
+              path="/mohe-application-forwarded-success"
+              component={MoheForwardSuccessPage}
+            />
           </Switch>
         </div>
       </BrowserRouter>
