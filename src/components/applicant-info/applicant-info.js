@@ -13,13 +13,19 @@ import { Modal } from "react-responsive-modal";
 
 import { addToVerificationList } from "../../store/actions/add-to-attache-approval";
 
+// import { Overlay } from "react-portal-overlay";
+
+import Popup from "reactjs-popup";
+
 const dateFormat = require("dateformat");
 
 const ApplicantInfo = (props) => {
-  const { applicantInfo, auth, addToVerificationList } = props;
+  const { applicantInfo, auth, addToVerificationList, profile } = props;
   if (!auth.uid) return <Redirect to="/sign-in" />;
 
   const [applicantDocument, setApplicantDocument] = useState(null);
+  const [showApproveModal, setShowApproveModal] = useState(false);
+  const [showRejectModal, setShowRejectModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
@@ -652,35 +658,73 @@ const ApplicantInfo = (props) => {
               </div>
             </div>
           </div>
-          <div className="col s12 m4">
-            <div className="section">
-              <div className="card z-depth-0">
-                <div className="card-content">
-                  <span>Application Status: </span>
-                  <br />
-                  {applicantDocument && applicantDocument.isVerified ? (
-                    ""
-                  ) : (
-                    <div>
-                      <p>
-                        <b className="not-verified">Not yet verified </b>{" "}
-                        <b>by an Attaché</b>
-                      </p>
-                      <br />
-                      <a
-                        class="waves-effect waves-light btn"
-                        onClick={() => setShowModal(!showModal)}
-                      >
-                        Request Verification
-                      </a>
-                    </div>
-                  )}
+          {profile.userType == "attache" ? (
+            <div className="col s12 m4">
+              <div className="section">
+                <div className="card z-depth-0">
+                  <div className="card-content">
+                    <b>Verify This Application</b>
+                    <br />
+                    <br />
+                    <a
+                      class="waves-effect green darken-3
+                          btn"
+                      onClick={() => setShowApproveModal(!showApproveModal)}
+                      style={{ width: "100%" }}
+                    >
+                      Approved Application
+                    </a>
+                    <br />
+                    <br />
+                    <a
+                      class="waves-effect red darken-4 btn"
+                      onClick={() => setShowRejectModal(!showRejectModal)}
+                      style={{ width: "100%" }}
+                    >
+                      Reject Application
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="col s12 m4">
+              <div className="section">
+                <div className="card z-depth-0">
+                  <div className="card-content">
+                    <span>Application Status: </span>
+                    <br />
+                    {applicantInfo && applicantInfo.isVerified === null ? (
+                      <div>
+                        <p>
+                          <b className="not-verified">Not yet verified </b>{" "}
+                          <b>by an Attaché</b>
+                        </p>
+                        <br />
+                        <a
+                          class="waves-effect waves-light btn"
+                          onClick={() => setShowModal(!showModal)}
+                        >
+                          Request Verification
+                        </a>
+                      </div>
+                    ) : null}
+                    {applicantInfo &&
+                    applicantInfo.isVerified === "attache-waiting" ? (
+                      <div>
+                        <p>
+                          <b className="not-verified">Waiting Verification </b>{" "}
+                          <b>of the Attaché</b>
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-        <Modal open={showModal} onClose={() => setShowModal(!showModal)} center>
+        {/* <Modal open={showModal} onClose={() => setShowModal(!showModal)} center>
           <ul class="collection with-header">
             <li class="collection-header">
               <h4>Forward application?</h4>
@@ -712,7 +756,92 @@ const ApplicantInfo = (props) => {
               </div>
             </li>
           </ul>
-        </Modal>
+        </Modal> */}
+        {/* <Overlay open={showModal} onClose={() => setShowModal(!showModal)}>
+          <h1>My overlay</h1>
+          dmfkjsdjfsj
+        </Overlay> */}
+
+        <Popup
+          open={showApproveModal}
+          // trigger={
+          //   <button onClick={() => setShowModal(!showModal)}> Trigger</button>
+          // }
+          modal
+          // closeOnDocumentClick
+          // position="right center"
+        >
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>Approved this application?</h4>
+            </li>
+            <li class="collection-item">
+              <div>
+                <p>
+                  By confirming this you're stating that the applicant details
+                  and document has been checked and proven to be{" "}
+                  <b> true and legal. </b>
+                </p>
+                <br />
+                <button
+                  className="btn pink lighten-1 z-depth-0"
+                  onClick={() => setShowApproveModal(!showApproveModal)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="waves-effect green darken-3 btn forward-btn"
+                  style={{ float: "right" }}
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  <Link to={`/mohe-application-forwarded-success`}>
+                    Approved Application
+                  </Link>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </Popup>
+        <Popup
+          open={showRejectModal}
+          // trigger={
+          //   <button onClick={() => setShowModal(!showModal)}> Trigger</button>
+          // }
+          modal
+          // closeOnDocumentClick
+          // position="right center"
+        >
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>Reject this application?</h4>
+            </li>
+            <li class="collection-item">
+              <div>
+                <p>
+                  By confirming this you're stating that the applicant details
+                  and document has been checked and applicant details and
+                  documents are <b>invalid and illegal.</b>
+                </p>
+                <br />
+                <button
+                  className="btn pink lighten-1 z-depth-0"
+                  onClick={() => setShowRejectModal(!showRejectModal)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="waves-effect red darken-4 btn forward-btn"
+                  style={{ float: "right" }}
+                  onClick={(e) => handleSubmit(e)}
+                >
+                  <Link to={`/mohe-application-forwarded-success`}>
+                    Reject Application
+                  </Link>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </Popup>
       </div>
     );
   } else {
@@ -730,9 +859,11 @@ const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
   const applicationForms = state.firestore.data.applicationForms;
   const applicantInfo = applicationForms ? applicationForms[id] : null;
+
   return {
     applicantInfo: applicantInfo,
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
   };
 };
 
