@@ -7,20 +7,25 @@ import { db } from "../../config/fbConfig";
 import { Link } from "react-router-dom";
 
 import "./applicant-info.css";
-
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
 
 import { addToVerificationList } from "../../store/actions/add-to-attache-approval";
-
-// import { Overlay } from "react-portal-overlay";
+import { approveApplicant } from "../../store/actions/attache-approval";
+import { moheFinalApprobation } from "../../store/actions/mohe-approval";
 
 import Popup from "reactjs-popup";
 
 const dateFormat = require("dateformat");
 
 const ApplicantInfo = (props) => {
-  const { applicantInfo, auth, addToVerificationList, profile } = props;
+  const {
+    applicantInfo,
+    auth,
+    addToVerificationList,
+    profile,
+    approveApplicant,
+    moheFinalApprobation,
+  } = props;
   if (!auth.uid) return <Redirect to="/sign-in" />;
 
   const [applicantDocument, setApplicantDocument] = useState(null);
@@ -28,7 +33,10 @@ const ApplicantInfo = (props) => {
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const handleSubmit = (e) => {
+  const [showMoheApproval, setMoheApproval] = useState(false);
+  // const [showMoheReject, setMoheReject] = useState(false);
+
+  const handleSubmit = (e, mode) => {
     const applicantDetails = {
       applicantName: `${applicantInfo.englishFirstName} ${applicantInfo.englishLastName}`,
       applicantCountry: applicantInfo.birthPlace,
@@ -37,8 +45,21 @@ const ApplicantInfo = (props) => {
     };
 
     console.log(applicantDetails, "state here");
+
+    if (mode === "attache-approval") {
+      addToVerificationList(applicantDetails);
+    }
+
+    if (mode === "mohe-approval-approved") {
+      console.log("lorem here");
+      approveApplicant(applicantDetails);
+    }
+
+    if (mode === "mohe-last-approval") {
+      moheFinalApprobation(applicantDetails);
+    }
+
     e.preventDefault();
-    addToVerificationList(applicantDetails);
   };
 
   const getApplicantDocuments = (userId) => {
@@ -658,7 +679,7 @@ const ApplicantInfo = (props) => {
               </div>
             </div>
           </div>
-          {profile.userType == "attache" ? (
+          {profile.userType === "attache" ? (
             <div className="col s12 m4">
               <div className="section">
                 <div className="card z-depth-0">
@@ -718,59 +739,71 @@ const ApplicantInfo = (props) => {
                         </p>
                       </div>
                     ) : null}
+
+                    {applicantInfo &&
+                    applicantInfo.isVerified === "mohe-waiting-approved" ? (
+                      <div>
+                        <p>
+                          <b>This Application was</b>{" "}
+                          <b className="mohe-waiting-approved">
+                            verified and approved
+                          </b>{" "}
+                          <b>by the Attaché</b>
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {applicantInfo &&
+                    applicantInfo.isVerified === "mohe-final-approved" ? (
+                      <div>
+                        <p>
+                          <b>This Application was already</b>{" "}
+                          <b className="mohe-final-approved">
+                            verified and approved.
+                          </b>
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
             </div>
           )}
-        </div>
-        {/* <Modal open={showModal} onClose={() => setShowModal(!showModal)} center>
-          <ul class="collection with-header">
-            <li class="collection-header">
-              <h4>Forward application?</h4>
-            </li>
-            <li class="collection-item">
-              <div>
-                <p>
-                  This application will now be forwarded to the attache of{" "}
-                  <b>{applicantInfo.birthPlace}.</b> This will be view and will
-                  verify by the attache if the applicant details and documents
-                  are all true and legal.
-                </p>
-                <br />
-                <button
-                  className="btn pink lighten-1 z-depth-0"
-                  onClick={() => setShowModal(!showModal)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="waves-effect waves-light btn forward-btn"
-                  style={{ float: "right" }}
-                  onClick={(e) => handleSubmit(e)}
-                >
-                  <Link to={`/mohe-application-forwarded-success`}>
-                    Send Application For Verification
-                  </Link>
-                </button>
-              </div>
-            </li>
-          </ul>
-        </Modal> */}
-        {/* <Overlay open={showModal} onClose={() => setShowModal(!showModal)}>
-          <h1>My overlay</h1>
-          dmfkjsdjfsj
-        </Overlay> */}
 
-        <Popup
-          open={showApproveModal}
-          // trigger={
-          //   <button onClick={() => setShowModal(!showModal)}> Trigger</button>
-          // }
-          modal
-          // closeOnDocumentClick
-          // position="right center"
-        >
+          {profile.userType === "mohe" &&
+          applicantInfo &&
+          applicantInfo.isVerified === "mohe-waiting-approved" ? (
+            <div className="col s12 m4">
+              <div className="section">
+                <div className="card z-depth-0">
+                  <div className="card-content" style={{ textAlign: "center" }}>
+                    <b>Verify This Application</b>
+                    <br />
+                    <br />
+                    <a
+                      class="waves-effect green darken-3
+                          btn"
+                      onClick={() => setMoheApproval(!showMoheApproval)}
+                      style={{ width: "100%" }}
+                    >
+                      Approved Application
+                    </a>
+                    <br />
+                    <br />
+                    <a
+                      class="waves-effect red darken-4 btn"
+                      onClick={() => setShowRejectModal(!showRejectModal)}
+                      style={{ width: "100%" }}
+                    >
+                      Reject Application
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </div>
+        <Popup open={showApproveModal} modal>
           <ul class="collection with-header">
             <li class="collection-header">
               <h4>Approved this application?</h4>
@@ -792,9 +825,9 @@ const ApplicantInfo = (props) => {
                 <button
                   className="waves-effect green darken-3 btn forward-btn"
                   style={{ float: "right" }}
-                  onClick={(e) => handleSubmit(e)}
+                  onClick={(e) => handleSubmit(e, "mohe-approval-approved")}
                 >
-                  <Link to={`/mohe-application-forwarded-success`}>
+                  <Link to={`/application-approved-success`}>
                     Approved Application
                   </Link>
                 </button>
@@ -802,15 +835,7 @@ const ApplicantInfo = (props) => {
             </li>
           </ul>
         </Popup>
-        <Popup
-          open={showRejectModal}
-          // trigger={
-          //   <button onClick={() => setShowModal(!showModal)}> Trigger</button>
-          // }
-          modal
-          // closeOnDocumentClick
-          // position="right center"
-        >
+        <Popup open={showRejectModal} modal>
           <ul class="collection with-header">
             <li class="collection-header">
               <h4>Reject this application?</h4>
@@ -836,6 +861,74 @@ const ApplicantInfo = (props) => {
                 >
                   <Link to={`/mohe-application-forwarded-success`}>
                     Reject Application
+                  </Link>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </Popup>
+
+        <Popup open={showModal} modal>
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>Forward application?</h4>
+            </li>
+            <li class="collection-item">
+              <div>
+                <p>
+                  This application will now be forwarded to the attache of{" "}
+                  <b>{applicantInfo.birthPlace}.</b> This will be view and will
+                  verify by the attache if the applicant details and documents
+                  are all true and legal.
+                </p>
+                <br />
+                <button
+                  className="btn pink lighten-1 z-depth-0"
+                  onClick={() => setShowModal(!showModal)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="waves-effect waves-light btn forward-btn"
+                  style={{ float: "right" }}
+                  onClick={(e) => handleSubmit(e, "attache-approval")}
+                >
+                  <Link to={`/mohe-application-forwarded-success`}>
+                    Send Application For Verification
+                  </Link>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </Popup>
+
+        <Popup open={showMoheApproval} modal>
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>Approved application?</h4>
+            </li>
+            <li class="collection-item">
+              <div>
+                <p>
+                  By approving this application the applicant will be notified
+                  that the application was approved, also declaring that the
+                  applicant information and documents that were submitted was an
+                  official and legal records.
+                </p>
+                <br />
+                <button
+                  className="btn pink lighten-1 z-depth-0"
+                  onClick={() => setMoheApproval(!showMoheApproval)}
+                >
+                  Close
+                </button>
+                <button
+                  className="waves-effect waves-light btn forward-btn"
+                  style={{ float: "right" }}
+                  onClick={(e) => handleSubmit(e, "mohe-last-approval")}
+                >
+                  <Link to={`/application-approved-success`}>
+                    Approve this Application
                   </Link>
                 </button>
               </div>
@@ -871,9 +964,16 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToVerificationList: (applicantDetails) =>
       dispatch(addToVerificationList(applicantDetails)),
+
+    approveApplicant: (applicantDetails) =>
+      dispatch(approveApplicant(applicantDetails)),
+
+    moheFinalApprobation: (applicantDetails) =>
+      dispatch(moheFinalApprobation(applicantDetails)),
   };
 };
 
+/*eslint-disable */
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
@@ -883,3 +983,4 @@ export default compose(
     },
   ])
 )(ApplicantInfo);
+/*eslint-enable */

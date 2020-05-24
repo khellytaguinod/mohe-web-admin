@@ -13,3 +13,11 @@
 .forward-btn > a {
   color: white;
 }
+
+.mohe-waiting-approved {
+  color: green;
+}
+
+.mohe-final-approved {
+  color: green;
+}

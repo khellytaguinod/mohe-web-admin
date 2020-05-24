@@ -21,13 +21,6 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   response.send("Hello from khelly taguinod hatdog!");
-// });
-
 const createNotification = (notification) => {
   return admin
     .firestore()
@@ -37,38 +30,30 @@ const createNotification = (notification) => {
 };
 
 const createAttacheAuth = (attacheDetails) => {
-  return (
-    admin
-      .auth()
-      .createUser({
-        email: attacheDetails.email,
-        password: attacheDetails.password,
-        displayName: attacheDetails.user,
-      })
-      // .then(function (userRecord) {
-      //   // See the UserRecord reference doc for the contents of userRecord.
-      //   console.log("Successfully created new user:", userRecord.uid);
-      // })
-
-      .then((userRecord) => {
-        return admin
-          .firestore()
-          .collection("users")
-          .doc(userRecord.uid)
-          .set({
-            firstName: attacheDetails.firstName,
-            lastName: attacheDetails.lastName,
-            initials: attacheDetails.firstName[0] + attacheDetails.lastName[0],
-            userType: "attache",
-            userEmail: attacheDetails.email,
-            country: attacheDetails.country,
-          });
-      })
-
-      .catch(function (error) {
-        console.log("Error creating new user:", error);
-      })
-  );
+  return admin
+    .auth()
+    .createUser({
+      email: attacheDetails.email,
+      password: attacheDetails.password,
+      displayName: attacheDetails.user,
+    })
+    .then((userRecord) => {
+      return admin
+        .firestore()
+        .collection("users")
+        .doc(userRecord.uid)
+        .set({
+          firstName: attacheDetails.firstName,
+          lastName: attacheDetails.lastName,
+          initials: attacheDetails.firstName[0] + attacheDetails.lastName[0],
+          userType: "attache",
+          userEmail: attacheDetails.email,
+          country: attacheDetails.country,
+        });
+    })
+    .catch(function (error) {
+      console.log("Error creating new user:", error);
+    });
 };
 
 exports.createAttache = functions.firestore
@@ -210,11 +195,10 @@ const sendSuccessSubmittedForm = (email, displayName) => {
   mailOptions.text = `Good Day Applicant 
 ${displayName}
   
-  
 You are receiving this email to informed you that you successfully submitted your application. Your application is now being process and being reviewed by Ministry of Educ Abroad. Please wait for updates and for further instructions.
   
-  MOHE-ECAES Web System.
-  This is an automated email. Please do not reply.
+MOHE-ECAES Web System.
+This is an automated email. Please do not reply.
   `;
 
   mailTransport.sendMail(mailOptions);
@@ -247,8 +231,8 @@ ${displayName}
   
 You are receiving this email to informed you that the application you submitted was viewed and now being forwarded to the ${country} Attaché. This is to verify that the details you submitted and real and legal. Please wait for further instructions.
   
-  MOHE-ECAES Web System.
-  This is an automated email. Please do not reply.
+MOHE-ECAES Web System.
+This is an automated email. Please do not reply.
   `;
 
   mailTransport.sendMail(mailOptions);
@@ -265,4 +249,38 @@ exports.applicantUploadedFiles = functions.firestore
     const name = applicant.applicantName;
     const country = applicant.applicantCountry;
     return sendEmailApplicantNotification(email, name, country);
+  });
+
+// Send a notification to the applicant that the application was forwarded to attache
+const moheApprovalEmailNotification = (email, displayName) => {
+  const APP_NAME = "MOHE-ECAES Web System";
+
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
+
+  mailOptions.subject = `Update about the application you submitted Applicant ${displayName}`;
+  mailOptions.text = `Good Day Applicant
+${displayName}
+
+Congratulations you're receiving this email because your application passed and the was successfully approved by the MOHE of Oman. Please wait for further instructions.
+
+MOHE-ECAES Web System.
+This is an automated email. Please do not reply.
+  `;
+
+  mailTransport.sendMail(mailOptions);
+  console.log("A notification email was sent to:", email);
+  return null;
+};
+
+exports.applicantUploadedFiles = functions.firestore
+  .document("moheFinalApprovedList/{applicantApprovedId}")
+  .onCreate((doc) => {
+    const applicant = doc.data();
+
+    const email = applicant.applicantEmail;
+    const name = applicant.applicantName;
+    return moheApprovalEmailNotification(email, name);
   });

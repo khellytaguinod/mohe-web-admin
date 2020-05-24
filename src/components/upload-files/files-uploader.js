@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
-
-import { Redirect, Link } from "react-router-dom";
-
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { submitApplicantUploadedData } from "../../store/actions/submittedApplicationActions";
@@ -68,7 +66,6 @@ class FilesUploader extends Component {
   };
 
   // passport photos handlers
-
   passportHandleUploadStart = () =>
     this.setState({ passportIsUploading: true, passportUploadProcess: 0 });
 
@@ -96,7 +93,6 @@ class FilesUploader extends Component {
   };
 
   //  user photo handlers
-
   userPhotoHandleUploadStart = () =>
     this.setState({ userPhotoIsUploading: true, userPhotoUploadProcess: 0 });
 
@@ -124,7 +120,6 @@ class FilesUploader extends Component {
   };
 
   // academic report
-
   academicReportHandleUploadStart = () =>
     this.setState({
       academicReportIsUploading: true,
@@ -155,7 +150,6 @@ class FilesUploader extends Component {
   };
 
   // travel details
-
   travelDetailsHandleUploadStart = () =>
     this.setState({
       travelDetailsIsUploading: true,
@@ -186,7 +180,6 @@ class FilesUploader extends Component {
   };
 
   // acknowledgement Document
-
   acknowledgementDocumentHandleUploadStart = () =>
     this.setState({
       acknowledgementDocumentIsUploading: true,
@@ -397,32 +390,20 @@ class FilesUploader extends Component {
         </div>
         <br />
         <br />
-        {/* <Link
-          to="/upload-documents"
-          onClick={(e) => handleSubmit(e)} 
-          disabled={!disabled}
-          className={`btn ${
-            this.state.yesToDeclaration !== false ? "" : "disabled"
-          }`}
-        > */}
         <button
           onClick={(e) => {
             this.setUploadingDoc();
             handleSubmit(e);
           }}
-          //  onChange={this.setCheckbox.bind(this)}
           disabled={
             disabledBtn === false || this.state.yesToDeclaration !== true
           }
           className="btn pink lighten-1 z-depth-0"
         >
-          {console.log(this.state.isUploadingDocument, "submiting huhu")}
-          {this.state.isUploadingDocument == true
+          {this.state.isUploadingDocument === true
             ? "Uploading Documents"
             : "Submit Application"}
-          {/* Submit Application */}
         </button>
-        {/* </Link> */}
         <div className="center red-text">
           {uploadingDocFailed ? <p>{uploadingDocFailed}</p> : null}
         </div>
@@ -433,8 +414,6 @@ class FilesUploader extends Component {
     );
   }
 }
-
-// export default FilesUploader;
 
 const mapStateToProps = (state) => {
   return {

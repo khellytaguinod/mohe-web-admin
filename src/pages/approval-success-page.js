@@ -2,8 +2,9 @@ import React from "react";
 import "./success-page.css";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-const SuccessPage = (props) => {
+const ApprovalSuccessPage = (props) => {
   const { auth } = props;
 
   if (!auth.uid) return <Redirect to="/sign-in" />;
@@ -12,7 +13,7 @@ const SuccessPage = (props) => {
     <div className="container section">
       <div className="card z-depth-0">
         <div className="card-content">
-          <span className="card-title">Application Submitted</span>
+          <span className="card-title">Application Approved</span>
 
           <span style={{ textAlign: "center" }}>
             <img
@@ -21,14 +22,16 @@ const SuccessPage = (props) => {
               className="success-img"
             />
 
-            <p>
-              Thank you applicant for submitting the required information and
-              documents
-            </p>
-            <p>
-              Please wait for the MOHE verification process you will receive an
-              email about your application status
-            </p>
+            <p>The Applicant Application was successfully approved.</p>
+            <br/>
+            <br/>
+            <br/>
+            <button
+              className="waves-effect waves-light btn dashboard-btn"
+              style={{ textAlign: "center" }}
+            >
+              <Link to={`/`}>Back to Dashboard</Link>
+            </button>
           </span>
         </div>
       </div>
@@ -44,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SuccessPage);
+export default connect(mapStateToProps)(ApprovalSuccessPage);

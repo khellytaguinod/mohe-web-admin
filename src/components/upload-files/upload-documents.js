@@ -1,14 +1,9 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
-
 import FilesUploader from "./files-uploader";
 
 class UploadFiles extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { profile } = this.props;
     return (

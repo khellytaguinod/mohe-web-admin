@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom";
-
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { addAttache } from "../../store/actions/createAttacheAction";
 
@@ -37,7 +34,6 @@ class ManageAttache extends Component {
     for (let i = 0, n = charset.length; i < length; ++i) {
       retVal += charset.charAt(Math.floor(Math.random() * n));
     }
-    // return retVal;
     this.setState({
       password: retVal,
     });
@@ -45,13 +41,9 @@ class ManageAttache extends Component {
 
   render() {
     const { createAccountSuccess, createAccountFailed } = this.props;
-    // if (auth.uid) return <Redirect to="/create-application" />;
-
     let disabled = Object.values(this.state).every(
       (o) => o !== "" && o !== null
     );
-
-    console.log(this.state, "look here");
 
     return (
       <div className="project-list section">
@@ -426,8 +418,6 @@ class ManageAttache extends Component {
     );
   }
 }
-
-// export default ManageAttache;
 
 const mapStateToProps = (state) => {
   return {
