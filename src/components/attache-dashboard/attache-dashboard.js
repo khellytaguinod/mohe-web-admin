@@ -73,6 +73,9 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: "applicationForms", orderBy: ["createdAt", "desc"] },
+    {
+      collection: "applicationForms",
+      orderBy: ["createdAt", "desc"],
+    },
   ])
 )(AttacheDashboard);

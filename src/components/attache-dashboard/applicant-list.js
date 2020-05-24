@@ -21,6 +21,12 @@ const ApplicantInfo = ({ applicantInfoFull, country }) => {
                       {applicantInfo.value.englishFirstName}
                       {applicantInfo.value.englishLastName}
                     </b>
+                    {" "}
+                    <span>
+                      {applicantInfo.value.isVerified === "mohe-final-approved"
+                        ? "(Approved Already)"
+                        : ""}
+                    </span>
                   </span>
                   <span style={{ float: "right" }}>
                     <Link
