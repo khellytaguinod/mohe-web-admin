@@ -56,3 +56,9 @@ export const signUp = (newUser) => {
       });
   };
 };
+
+export const clearSignUpPageMsg = () => {
+  return (dispatch) => {
+    dispatch({ type: "CLEAR_SIGNUP_PAGE_MESSAGE" });
+  };
+};

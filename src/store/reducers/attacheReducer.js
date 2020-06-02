@@ -19,6 +19,14 @@ const attacheReducer = (state = initState, action) => {
         failedMsg: "Creating Attache Account Failed",
       };
 
+    case "CLEAR_ATTACHE_MESSAGE":
+      console.log("clear msg");
+      return {
+        ...state,
+        successMsg: null,
+        failedMsg: null,
+      };
+
     default:
       return state;
   }

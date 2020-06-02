@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addAttache } from "../../store/actions/createAttacheAction";
+import {
+  addAttache,
+  clearAddAttacheMsg,
+} from "../../store/actions/createAttacheAction";
 
 import "./manage-attache.css";
 
@@ -40,10 +43,21 @@ class ManageAttache extends Component {
   };
 
   render() {
-    const { createAccountSuccess, createAccountFailed } = this.props;
+    const {
+      createAccountSuccess,
+      createAccountFailed,
+      clearAddAttacheMsg,
+    } = this.props;
+    
     let disabled = Object.values(this.state).every(
       (o) => o !== "" && o !== null
     );
+
+    if (createAccountSuccess) {
+      setTimeout(function () {
+        clearAddAttacheMsg();
+      }, 3000);
+    }
 
     return (
       <div className="project-list section">
@@ -54,6 +68,8 @@ class ManageAttache extends Component {
             </li>
           </ul>
           <form className="form-style" onSubmit={this.handleSubmit}>
+          <label>NOTE: Please use real email in creating a attache account.</label>
+
             <div className="input-field">
               <label htmlFor="email">Email</label>
               <input
@@ -429,6 +445,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addAttache: (creds) => dispatch(addAttache(creds)),
+    clearAddAttacheMsg: () => dispatch(clearAddAttacheMsg()),
   };
 };
 

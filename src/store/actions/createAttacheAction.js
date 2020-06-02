@@ -1,11 +1,9 @@
 export const addAttache = (newUserAttache) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    // const firebase = getFirebase();
     const firestore = getFirestore();
 
     firestore
       .collection("attacheList")
-      // .doc(resp.user.uid)
       .add({
         firstName: newUserAttache.firstName,
         lastName: newUserAttache.lastName,
@@ -21,5 +19,11 @@ export const addAttache = (newUserAttache) => {
       .catch((err) => {
         dispatch({ type: "SIGNUP_ATTACHE_ERROR", err });
       });
+  };
+};
+
+export const clearAddAttacheMsg = () => {
+  return (dispatch) => {
+    dispatch({ type: "CLEAR_ATTACHE_MESSAGE" });
   };
 };

@@ -163,7 +163,7 @@ const sendWelcomeEmail = (email, displayName) => {
   mailOptions.text = `Hey ${displayName}! 
   
 Welcome to ${APP_NAME}. 
-Thank you for registering your account. Please continue the required forms so your application can be review and verify.
+Thank you for registering your account. MOHE - ECAES web system.
   
 This is an automated email. Please do not reply.
   `;

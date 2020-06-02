@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { signUp } from "../../store/actions/authActions";
+import { signUp, clearSignUpPageMsg } from "../../store/actions/authActions";
 
 class SignUp extends Component {
   state = {
@@ -25,12 +25,18 @@ class SignUp extends Component {
   };
 
   render() {
-    const { auth, authError } = this.props;
+    const { auth, authError, clearSignUpPageMsg } = this.props;
     if (auth.uid) return <Redirect to="/" />;
 
     let disabled = Object.values(this.state).every(
       (o) => o !== "" && o !== null
     );
+
+    if (authError) {
+      setTimeout(function () {
+        clearSignUpPageMsg();
+      }, 3000);
+    }
 
     return (
       <div className="container">
@@ -63,10 +69,10 @@ class SignUp extends Component {
               </option>
               <option value="applicant">Applicant</option>
               <option value="mohe">Mohe</option>
-              <option value="attache">Attache</option>
-              <option value="ministry-of-educ-abroad">
+              {/* <option value="attache">Attache</option> */}
+              {/* <option value="ministry-of-educ-abroad">
                 Ministry of Educ Abroad
-              </option>
+              </option> */}
             </select>
           </div>
           <div className="input-field">
@@ -96,6 +102,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     signUp: (creds) => dispatch(signUp(creds)),
+    clearSignUpPageMsg: () => dispatch(clearSignUpPageMsg()),
   };
 };
 
