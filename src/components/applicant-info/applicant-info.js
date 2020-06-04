@@ -10,8 +10,9 @@ import "./applicant-info.css";
 import "react-responsive-modal/styles.css";
 
 import { addToVerificationList } from "../../store/actions/add-to-attache-approval";
-import { approveApplicant } from "../../store/actions/attache-approval";
+import { forwardFromAttacheToMohe } from "../../store/actions/forward-to-mohe-from-attache";
 import { moheFinalApprobation } from "../../store/actions/mohe-approval";
+import { moheFinalRejection } from "../../store/actions/mohe-rejected";
 
 import Popup from "reactjs-popup";
 
@@ -23,14 +24,16 @@ const ApplicantInfo = (props) => {
     auth,
     addToVerificationList,
     profile,
-    approveApplicant,
+    forwardFromAttacheToMohe,
     moheFinalApprobation,
+    moheFinalRejection,
   } = props;
   if (!auth.uid) return <Redirect to="/sign-in" />;
 
   const [applicantDocument, setApplicantDocument] = useState(null);
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [showRejectModal, setShowRejectModal] = useState(false);
+  const [attacheRejectModal, setAttacheRejectModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const [showMoheApproval, setMoheApproval] = useState(false);
@@ -41,25 +44,32 @@ const ApplicantInfo = (props) => {
       applicantName: `${applicantInfo.englishFirstName} ${applicantInfo.englishLastName}`,
       applicantCountry: applicantInfo.birthPlace,
       applicantEmail: applicantInfo.applicantEmail,
-      applicantStatus: "attache-approval",
+      applicantStatus: mode,
     };
 
     console.log(applicantDetails, "state here");
 
-    if (mode === "attache-approval") {
+    if (mode === "for-attache-approval") {
       addToVerificationList(applicantDetails);
     }
 
-    if (mode === "mohe-approval-approved") {
+    if (
+      mode === "already-approved-by-attache" ||
+      "already-rejected-by-attache"
+    ) {
       console.log("lorem here");
-      approveApplicant(applicantDetails);
+      forwardFromAttacheToMohe(applicantDetails, mode);
     }
 
     if (mode === "mohe-last-approval") {
       moheFinalApprobation(applicantDetails);
     }
 
-    e.preventDefault();
+    if (mode === "mohe-last-reject") {
+      moheFinalRejection(applicantDetails);
+    }
+
+    // e.preventDefault();
   };
 
   const getApplicantDocuments = (userId) => {
@@ -90,6 +100,12 @@ const ApplicantInfo = (props) => {
   if (applicantInfo) {
     return (
       <div className="dashboard container">
+        <br />
+
+        <Link to={`/`} style={{ color: "white" }}>
+          Go back
+        </Link>
+
         <div className="row row-style">
           <div className="col s12 m8">
             <div className="section">
@@ -118,7 +134,7 @@ const ApplicantInfo = (props) => {
                         <br />
                       </div>
                     </li>
-                    <li className="collection-item">
+                    {/* <li className="collection-item">
                       <div>
                         <span className="table-label">
                           <b>العربية</b>
@@ -132,7 +148,7 @@ const ApplicantInfo = (props) => {
                         </span>{" "}
                         <br />
                       </div>
-                    </li>
+                    </li> */}
                     <li className="collection-item">
                       <div className="row row-style">
                         <div className="col">
@@ -679,6 +695,7 @@ const ApplicantInfo = (props) => {
               </div>
             </div>
           </div>
+
           {profile.userType === "attache" ? (
             <div className="col s12 m4">
               <div className="section">
@@ -699,7 +716,7 @@ const ApplicantInfo = (props) => {
                     <br />
                     <a
                       class="waves-effect red darken-4 btn"
-                      onClick={() => setShowRejectModal(!showRejectModal)}
+                      onClick={() => setAttacheRejectModal(!attacheRejectModal)}
                       style={{ width: "100%" }}
                     >
                       Reject Application
@@ -730,6 +747,7 @@ const ApplicantInfo = (props) => {
                         </a>
                       </div>
                     ) : null}
+
                     {applicantInfo &&
                     applicantInfo.isVerified === "attache-waiting" ? (
                       <div>
@@ -741,12 +759,27 @@ const ApplicantInfo = (props) => {
                     ) : null}
 
                     {applicantInfo &&
-                    applicantInfo.isVerified === "mohe-waiting-approved" ? (
+                    applicantInfo.isVerified ===
+                      "already-approved-by-attache" ? (
                       <div>
                         <p>
                           <b>This Application was</b>{" "}
-                          <b className="mohe-waiting-approved">
+                          <b className="already-approved-by-attache">
                             verified and approved
+                          </b>{" "}
+                          <b>by the Attaché</b>
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {applicantInfo &&
+                    applicantInfo.isVerified ===
+                      "already-rejected-by-attache" ? (
+                      <div>
+                        <p>
+                          <b>This Application was</b>{" "}
+                          <b className="already-rejected-by-attache">
+                            verified and rejected
                           </b>{" "}
                           <b>by the Attaché</b>
                         </p>
@@ -764,15 +797,28 @@ const ApplicantInfo = (props) => {
                         </p>
                       </div>
                     ) : null}
+
+                    {applicantInfo &&
+                    applicantInfo.isVerified === "mohe-final-reject" ? (
+                      <div>
+                        <p>
+                          <b>This Application was already</b>{" "}
+                          <b className="mohe-final-reject">
+                            verified and reject.
+                          </b>
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {profile.userType === "mohe" &&
-          applicantInfo &&
-          applicantInfo.isVerified === "mohe-waiting-approved" ? (
+          {(profile.userType === "mohe" &&
+            applicantInfo &&
+            applicantInfo.isVerified === "already-approved-by-attache") ||
+          applicantInfo.isVerified === "already-rejected-by-attache" ? (
             <div className="col s12 m4">
               <div className="section">
                 <div className="card z-depth-0">
@@ -803,6 +849,7 @@ const ApplicantInfo = (props) => {
             </div>
           ) : null}
         </div>
+
         <Popup open={showApproveModal} modal>
           <ul class="collection with-header">
             <li class="collection-header">
@@ -825,7 +872,9 @@ const ApplicantInfo = (props) => {
                 <button
                   className="waves-effect green darken-3 btn forward-btn"
                   style={{ float: "right" }}
-                  onClick={(e) => handleSubmit(e, "mohe-approval-approved")}
+                  onClick={(e) =>
+                    handleSubmit(e, "already-approved-by-attache")
+                  }
                 >
                   <Link to={`/application-approved-success`}>
                     Approved Application
@@ -835,6 +884,43 @@ const ApplicantInfo = (props) => {
             </li>
           </ul>
         </Popup>
+
+        <Popup open={attacheRejectModal} modal>
+          <ul class="collection with-header">
+            <li class="collection-header">
+              <h4>Reject this application?</h4>
+            </li>
+            <li class="collection-item">
+              <div>
+                <p>
+                  By confirming this you're stating that the applicant details
+                  and document has been checked and applicant details and
+                  documents are <b>invalid and illegal.</b>
+                </p>
+                <br />
+                <button
+                  className="btn pink lighten-1 z-depth-0"
+                  onClick={() => setAttacheRejectModal(!attacheRejectModal)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="waves-effect red darken-4 btn forward-btn"
+                  style={{ float: "right" }}
+                  onClick={(e) =>
+                    handleSubmit(e, "already-rejected-by-attache")
+                  }
+                >
+                  <Link to={`/application-attache-reject`}>
+                    Reject Application
+                  </Link>
+                </button>
+              </div>
+            </li>
+          </ul>
+        </Popup>
+
+        {/* <labe>MOHE REJECTION MODAL</labe> */}
         <Popup open={showRejectModal} modal>
           <ul class="collection with-header">
             <li class="collection-header">
@@ -857,9 +943,9 @@ const ApplicantInfo = (props) => {
                 <button
                   className="waves-effect red darken-4 btn forward-btn"
                   style={{ float: "right" }}
-                  onClick={(e) => handleSubmit(e)}
+                  onClick={(e) => handleSubmit(e, "mohe-last-reject")}
                 >
-                  <Link to={`/mohe-application-forwarded-success`}>
+                  <Link to={`/application-mohe-reject`}>
                     Reject Application
                   </Link>
                 </button>
@@ -891,7 +977,7 @@ const ApplicantInfo = (props) => {
                 <button
                   className="waves-effect waves-light btn forward-btn"
                   style={{ float: "right" }}
-                  onClick={(e) => handleSubmit(e, "attache-approval")}
+                  onClick={(e) => handleSubmit(e, "for-attache-approval")}
                 >
                   <Link to={`/mohe-application-forwarded-success`}>
                     Send Application For Verification
@@ -965,11 +1051,14 @@ const mapDispatchToProps = (dispatch) => {
     addToVerificationList: (applicantDetails) =>
       dispatch(addToVerificationList(applicantDetails)),
 
-    approveApplicant: (applicantDetails) =>
-      dispatch(approveApplicant(applicantDetails)),
+    forwardFromAttacheToMohe: (applicantDetails, mode) =>
+      dispatch(forwardFromAttacheToMohe(applicantDetails, mode)),
 
     moheFinalApprobation: (applicantDetails) =>
       dispatch(moheFinalApprobation(applicantDetails)),
+
+    moheFinalRejection: (applicantDetails) =>
+      dispatch(moheFinalRejection(applicantDetails)),
   };
 };
 

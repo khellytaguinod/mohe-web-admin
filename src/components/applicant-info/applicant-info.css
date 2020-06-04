@@ -14,10 +14,18 @@
   color: white;
 }
 
-.mohe-waiting-approved {
+.already-approved-by-attache {
   color: green;
+}
+
+.already-rejected-by-attache {
+  color: red;
 }
 
 .mohe-final-approved {
   color: green;
+}
+
+.mohe-final-reject {
+  color: red;
 }

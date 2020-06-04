@@ -14,6 +14,8 @@ import ApplicantInfo from "./components/applicant-info/applicant-info";
 import SuccessPage from "./pages/success-page";
 import MoheForwardSuccessPage from "./components/admin-mohe/success-page/success-page";
 import ApprovalSuccessPage from "./pages/approval-success-page";
+import AttacheRejectPage from "./pages/attache-rejected-page";
+import MOHERejectedPage from "./pages/mohe-rejected-page";
 
 class App extends Component {
   render() {
@@ -37,6 +39,14 @@ class App extends Component {
             <Route path="/create-application" component={ApplicantForm} />
             <Route path="/upload-documents" component={UploadFiles} />
             <Route path="/application-submit-success" component={SuccessPage} />
+            <Route
+              path="/application-attache-reject"
+              component={AttacheRejectPage}
+            />
+            <Route
+              path="/application-mohe-reject"
+              component={MOHERejectedPage}
+            />
             <Route
               path="/application-approved-success"
               component={ApprovalSuccessPage}

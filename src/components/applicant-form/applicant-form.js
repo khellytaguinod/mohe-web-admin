@@ -16,10 +16,10 @@ class ApplicantForm extends Component {
     englishThirdName: "",
     englishLastName: "",
 
-    arabicFirstName: "",
-    arabicSecondName: "",
-    arabicThirdName: "",
-    arabicLastName: "",
+    // arabicFirstName: "",
+    // arabicSecondName: "",
+    // arabicThirdName: "",
+    // arabicLastName: "",
 
     birthDate: null,
     nationality: "",
@@ -88,7 +88,7 @@ class ApplicantForm extends Component {
 
   handleSubmit = (e) => {
     // e.preventDefault();
-    console.log("please work");
+    console.log("uploading applicant form");
     this.props.createApplicationForm(this.state);
   };
 
@@ -135,9 +135,9 @@ class ApplicantForm extends Component {
 
     console.log(this.state, "state here");
 
-    let disabled = Object.values(this.state).every(
-      (o) => o !== "" && o !== null
-    );
+    // let disabled = Object.values(this.state).every(
+    //   (o) => o !== "" && o !== null
+    // );
 
     return (
       <div className="container">
@@ -150,9 +150,9 @@ class ApplicantForm extends Component {
           </h5>
           <fieldset>
             <legend>Personal Information</legend>
-            <div class="row">
+            <div className="row">
               <h6>English / الإنجليزيه </h6>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="englishFirstName">First Name</label>
                   <input
@@ -162,7 +162,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="englishSecondName">Second Name</label>
                   <input
@@ -172,7 +172,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="englishThirdName">Third Name</label>
                   <input
@@ -182,7 +182,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="englishLastName">Last Name</label>
                   <input
@@ -193,9 +193,9 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
+            {/* <div className="row">
               <h6>Arabic / العربية </h6>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="arabicFirstName">First Name</label>
                   <input
@@ -205,7 +205,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="arabicSecondName">Second Name</label>
                   <input
@@ -215,7 +215,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="arabicThirdName">Third Name</label>
                   <input
@@ -225,7 +225,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="arabicLastName">Last Name</label>
                   <input
@@ -235,10 +235,10 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-            </div>
-            <div class="row">
+            </div> */}
+            <div className="row">
               <div
-                class="col s1"
+                className="col s1"
                 style={{
                   height: "75px",
                   padding: "26px 0px 0px 0px",
@@ -247,7 +247,7 @@ class ApplicantForm extends Component {
                 Birth Date
               </div>
               <div
-                class="col s3"
+                className="col s3"
                 style={{
                   margin: "12px 0px 0px 0px",
                 }}
@@ -261,7 +261,7 @@ class ApplicantForm extends Component {
                 />
               </div>
               <div
-                class="col s1"
+                className="col s1"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -270,10 +270,10 @@ class ApplicantForm extends Component {
               >
                 Nationality
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="nationality"
                     onChange={this.handleChange}
                   >
@@ -482,7 +482,7 @@ class ApplicantForm extends Component {
                 </div>
               </div>
               <div
-                class="col s1"
+                className="col s1"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -491,10 +491,10 @@ class ApplicantForm extends Component {
               >
                 Birth Place
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="birthPlace"
                     onChange={this.handleChange}
                   >
@@ -825,9 +825,9 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div className="row">
               <div
-                class="col s3"
+                className="col s3"
                 style={{
                   height: "75px",
                   padding: "26px 0px 0px 0px",
@@ -835,8 +835,8 @@ class ApplicantForm extends Component {
               >
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">Choose Gender</label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -849,7 +849,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -866,7 +866,7 @@ class ApplicantForm extends Component {
                 </div>
               </div>
               <div
-                class="col s1"
+                className="col s1"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -876,10 +876,10 @@ class ApplicantForm extends Component {
                 Religion
               </div>
 
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="religion"
                     onChange={this.handleChange}
                   >
@@ -893,7 +893,7 @@ class ApplicantForm extends Component {
               </div>
 
               <div
-                class="col s1.5"
+                className="col s1.5"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -903,10 +903,10 @@ class ApplicantForm extends Component {
                 Marital Status
               </div>
 
-              <div class="col s3" style={{ float: "right" }}>
+              <div className="col s3" style={{ float: "right" }}>
                 <div className="input-field">
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="martialStatus"
                     onChange={this.handleChange}
                   >
@@ -921,9 +921,9 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div className="row">
               <h6>ID Information</h6>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="idNumber">ID Number</label>
                   <input
@@ -934,7 +934,7 @@ class ApplicantForm extends Component {
                 </div>
               </div>
               <div
-                class="col s1.5"
+                className="col s1.5"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -944,7 +944,7 @@ class ApplicantForm extends Component {
                 ID Expiry Date
               </div>
               <div
-                class="col s4"
+                className="col s4"
                 style={{
                   margin: "12px 0px 0px 0px",
                 }}
@@ -957,9 +957,9 @@ class ApplicantForm extends Component {
                 />
               </div>
             </div>
-            <div class="row">
+            <div className="row">
               <h6>Passport Information</h6>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="passportNumber">Passport Number</label>
                   <input
@@ -970,7 +970,7 @@ class ApplicantForm extends Component {
                 </div>
               </div>
               <div
-                class="col s1.5"
+                className="col s1.5"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -980,7 +980,7 @@ class ApplicantForm extends Component {
                 Passport Issue Date
               </div>
               <div
-                class="col s2"
+                className="col s2"
                 style={{
                   margin: "12px 0px 0px 0px",
                 }}
@@ -992,7 +992,7 @@ class ApplicantForm extends Component {
                 />
               </div>
               <div
-                class="col s1.5"
+                className="col s1.5"
                 style={{
                   height: "75px",
                   textAlign: "center",
@@ -1002,7 +1002,7 @@ class ApplicantForm extends Component {
                 Passport Expiry Date
               </div>
               <div
-                class="col s2"
+                className="col s2"
                 style={{
                   margin: "12px 0px 0px 0px",
                 }}
@@ -1014,10 +1014,10 @@ class ApplicantForm extends Component {
                 />
               </div>
             </div>
-            <div class="row">
+            <div className="row">
               <h6>Highschool Information</h6>
               <div
-                class="col s1.5"
+                className="col s1.5"
                 style={{
                   height: "75px",
                   padding: "26px 0px 0px 0px",
@@ -1026,10 +1026,10 @@ class ApplicantForm extends Component {
                 HighSchool Certificate
               </div>
 
-              <div class="col s2">
+              <div className="col s2">
                 <div className="input-field">
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="hsCertificate"
                     onChange={this.handleChange}
                   >
@@ -1097,18 +1097,18 @@ class ApplicantForm extends Component {
                 </div>
               </div>
 
-              <div class="col s2">
+              <div className="col s2">
                 <div className="input-field">
                   <label htmlFor="hsGraduationYear">Graduation Year</label>
                   <input
                     type="text"
                     id="hsGraduationYear"
-                    maxlength="4"
+                    maxLength="4"
                     onChange={this.handleChange}
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="hsAverage">HighSchool Average</label>
                   <input
@@ -1118,7 +1118,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s2">
+              <div className="col s2">
                 <div className="input-field">
                   <label htmlFor="hsGPA">HighSchool GPA</label>
                   <input type="text" id="hsGPA" onChange={this.handleChange} />
@@ -1128,12 +1128,12 @@ class ApplicantForm extends Component {
           </fieldset>
           <fieldset>
             <legend>General Information</legend>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">Are you employed?</label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1146,7 +1146,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1162,11 +1162,11 @@ class ApplicantForm extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">English Language Exam?</label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1179,7 +1179,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1195,11 +1195,11 @@ class ApplicantForm extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">Have Medical Problems?</label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1212,7 +1212,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1228,11 +1228,11 @@ class ApplicantForm extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">Do you have Disability?</label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1245,7 +1245,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1262,8 +1262,8 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="noOfAward">Number of Awards</label>
                   <input
@@ -1273,7 +1273,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="noOfHRDCourses">Number of HRD Courses</label>
                   <input
@@ -1283,7 +1283,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="noOfInventions">Number of Inventions</label>
                   <input
@@ -1295,7 +1295,7 @@ class ApplicantForm extends Component {
               </div>
             </div>
             <div className="row">
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="bankAccountNo">Bank Account Number</label>
                   <input
@@ -1305,7 +1305,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="bankName">Bank Name</label>
                   <input
@@ -1315,11 +1315,11 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
-                  <labe>Country of the bank</labe>
+                  <label>Country of the bank</label>
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="bankCountry"
                     onChange={this.handleChange}
                   >
@@ -1649,13 +1649,13 @@ class ApplicantForm extends Component {
                   </select>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">
                     Is it your bank account?
                   </label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1668,7 +1668,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1690,11 +1690,11 @@ class ApplicantForm extends Component {
             <legend>
               Academic details of the qualification you want to study
             </legend>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <label className="radio-label">Study Location?</label>
-                <div class="row radio-btn-container">
-                  <div class="col s12">
+                <div className="row radio-btn-container">
+                  <div className="col s12">
                     <p>
                       <label>
                         <input
@@ -1709,10 +1709,10 @@ class ApplicantForm extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <label className="radio-label">Study Country?</label>
-                <div class="row radio-btn-container">
-                  <div class="col s12">
+                <div className="row radio-btn-container">
+                  <div className="col s12">
                     <p>
                       <label>
                         <input
@@ -1727,11 +1727,11 @@ class ApplicantForm extends Component {
                   </div>
                 </div>
               </div>
-              <div class="col s5">
+              <div className="col s5">
                 <div onChange={this.setRadio.bind(this)}>
                   <label className="radio-label">Study Level?</label>
-                  <div class="row radio-btn-container">
-                    <div class="col s6">
+                  <div className="row radio-btn-container">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1744,7 +1744,7 @@ class ApplicantForm extends Component {
                         </label>
                       </p>
                     </div>
-                    <div class="col s6">
+                    <div className="col s6">
                       <p>
                         <label>
                           <input
@@ -1761,12 +1761,12 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <div className="input-field">
-                  <labe>Study Mode</labe>
+                  <label>Study Mode</label>
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="studyMode"
                     onChange={this.handleChange}
                   >
@@ -1784,11 +1784,11 @@ class ApplicantForm extends Component {
                   </select>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
-                  <labe>Choose University</labe>
+                  <label>Choose University</label>
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="university"
                     onChange={this.handleChange}
                   >
@@ -2065,7 +2065,7 @@ class ApplicantForm extends Component {
                   </select>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="college">College</label>
                   <input
@@ -2076,8 +2076,8 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s4">
+            <div className="row">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="mainMajor">Main Major</label>
                   <input
@@ -2087,7 +2087,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s4">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="subMajor">Sub Major</label>
                   <input
@@ -2097,7 +2097,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s4">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="certificate">Certificate</label>
                   <input
@@ -2108,8 +2108,8 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="studyPeriod">Study Period</label>
                   <input
@@ -2119,7 +2119,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="expGradDate">Exp. Grad Date</label>
                   <input
@@ -2129,7 +2129,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="academicYear">Academic Year</label>
                   <input
@@ -2139,7 +2139,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <label>Start Date</label>
                 <DatePicker
                   showPopperArrow={false}
@@ -2151,8 +2151,8 @@ class ApplicantForm extends Component {
           </fieldset>
           <fieldset>
             <legend>Contact Information</legend>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="omanMobileNo">Oman Mobile Number</label>
                   <input
@@ -2162,19 +2162,19 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="email">Email Address</label>
                   <input type="email" id="email" onChange={this.handleChange} />
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s3">
+            <div className="row">
+              <div className="col s3">
                 <div className="input-field">
-                  <labe>Region</labe>
+                  <label>Region</label>
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="region"
                     onChange={this.handleChange}
                   >
@@ -2218,7 +2218,7 @@ class ApplicantForm extends Component {
                   </select>
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="wilayah">wilayah</label>
                   <input
@@ -2228,7 +2228,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="postalCode">Postal Code</label>
                   <input
@@ -2238,15 +2238,15 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s3">
+              <div className="col s3">
                 <div className="input-field">
                   <label htmlFor="poBox">PO Box</label>
                   <input type="text" id="poBox" onChange={this.handleChange} />
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s4">
+            <div className="row">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="guardianName"> Guardian Name</label>
                   <input
@@ -2256,7 +2256,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s4">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="guardianAddress"> Guardian Address</label>
                   <input
@@ -2266,11 +2266,11 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s4">
+              <div className="col s4">
                 <div className="input-field">
-                  <labe> Guardian Relationship</labe>
+                  <label> Guardian Relationship</label>
                   <select
-                    class="browser-default"
+                    className="browser-default"
                     id="guardianRelationship"
                     onChange={this.handleChange}
                   >
@@ -2292,8 +2292,8 @@ class ApplicantForm extends Component {
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col s4">
+            <div className="row">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="guardianMobileNo">
                     Guardian Mobile Number In Oman
@@ -2305,7 +2305,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s4">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="guardianWorkLoc">
                     Guardian Work Location
@@ -2317,7 +2317,7 @@ class ApplicantForm extends Component {
                   />
                 </div>
               </div>
-              <div class="col s4">
+              <div className="col s4">
                 <div className="input-field">
                   <label htmlFor="guardianWorkNo">Guardian Work Number</label>
                   <input
@@ -2333,9 +2333,10 @@ class ApplicantForm extends Component {
             <Link
               to="/upload-documents"
               onClick={this.handleSubmit}
-              className={!disabled ? "disabled" : ""}
+              // className={!disabled ? "disabled" : ""}
             >
-              <button disabled={!disabled} className="btn pink lighten-1">
+              {/* <button disabled={!disabled} className="btn pink lighten-1"> */}
+              <button className="btn pink lighten-1">
                 Next Page
               </button>
             </Link>

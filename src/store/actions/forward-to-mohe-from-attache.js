@@ -1,6 +1,6 @@
 import { dateAndTime } from "../../utils";
 
-export const approveApplicant = (applicantDetails) => {
+export const forwardFromAttacheToMohe = (applicantDetails, mode) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
 
@@ -28,7 +28,7 @@ export const approveApplicant = (applicantDetails) => {
         console.log('huhu salt')
         if (docID) {
           firestore.collection("applicationForms").doc(`${docID}`).update({
-            isVerified: "mohe-waiting-approved",
+            isVerified: mode,
           });
         }
       })

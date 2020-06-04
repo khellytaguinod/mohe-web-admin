@@ -229,7 +229,7 @@ const sendEmailApplicantNotification = (email, displayName, country) => {
   mailOptions.text = `Good Day Applicant 
 ${displayName}
   
-You are receiving this email to informed you that the application you submitted was viewed and now being forwarded to the ${country} Attaché. This is to verify that the details you submitted and real and legal. Please wait for further instructions.
+You are receiving this email to inform you that the application you submitted was viewed and now being forwarded to the ${country} Attaché. This is to verify that the details you submitted and real and legal. Please wait for further instructions.
   
 MOHE-ECAES Web System.
 This is an automated email. Please do not reply.
@@ -240,7 +240,7 @@ This is an automated email. Please do not reply.
   return null;
 };
 
-exports.applicantUploadedFiles = functions.firestore
+exports.applicantNotificationForwardedToAttache = functions.firestore
   .document("attacheVerificationList/{attacheVerificationListId}")
   .onCreate((doc) => {
     const applicant = doc.data();
@@ -251,7 +251,7 @@ exports.applicantUploadedFiles = functions.firestore
     return sendEmailApplicantNotification(email, name, country);
   });
 
-// Send a notification to the applicant that the application was forwarded to attache
+// Send a notification to the applicant that the application was approved by MOHE
 const moheApprovalEmailNotification = (email, displayName) => {
   const APP_NAME = "MOHE-ECAES Web System";
 
@@ -275,7 +275,7 @@ This is an automated email. Please do not reply.
   return null;
 };
 
-exports.applicantUploadedFiles = functions.firestore
+exports.applicantNotificationForwardedToMohe = functions.firestore
   .document("moheFinalApprovedList/{applicantApprovedId}")
   .onCreate((doc) => {
     const applicant = doc.data();
@@ -283,4 +283,72 @@ exports.applicantUploadedFiles = functions.firestore
     const email = applicant.applicantEmail;
     const name = applicant.applicantName;
     return moheApprovalEmailNotification(email, name);
+  });
+
+// Send a notification to the applicant that the application was declined by MOHE
+const moheRejectionNotification = (email, displayName) => {
+  const APP_NAME = "MOHE-ECAES Web System";
+
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
+
+  mailOptions.subject = `Update about the application you submitted Applicant ${displayName}`;
+  mailOptions.text = `Good Day Applicant
+${displayName}
+
+We regret to informed you that the application you submitted was declined and rejected by the MOHE of Oman. Please wait for further instructions.
+
+MOHE-ECAES Web System.
+This is an automated email. Please do not reply.
+  `;
+
+  mailTransport.sendMail(mailOptions);
+  console.log("A notification email was sent to:", email);
+  return null;
+};
+
+exports.applicantNotificationMoheRejection = functions.firestore
+  .document("moheFinalRejectList/{applicantRejectedId}")
+  .onCreate((doc) => {
+    const applicant = doc.data();
+
+    const email = applicant.applicantEmail;
+    const name = applicant.applicantName;
+    return moheRejectionNotification(email, name);
+  });
+
+const applicantEmailUpdateAttacheToMohe = (email, displayName, country) => {
+  const APP_NAME = "MOHE-ECAES Web System";
+
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
+
+  mailOptions.subject = `Update about the application you submitted Applicant ${displayName}`;
+  mailOptions.text = `Good Day Applicant
+  ${displayName}
+  
+  You are receiving this email to inform you that the application you submitted was already verified and validated. By the ${country} Attaché. You may contact the MOHE of Oman for the update of the results of verification process.
+
+  MOHE-ECAES Web System.
+  This is an automated email. Please do not reply.
+    `;
+
+  mailTransport.sendMail(mailOptions);
+  console.log("A notification email was sent to:", email);
+  return null;
+};
+
+exports.applicantNotificationAttacheForwardToMOHE = functions.firestore
+  .document("moheApprovalList/{applicantApplicationId}")
+  .onCreate((doc) => {
+    const applicant = doc.data();
+
+    const email = applicant.applicantEmail;
+    const name = applicant.applicantName;
+    const country = applicant.applicantCountry;
+    return applicantEmailUpdateAttacheToMohe(email, name, country);
   });

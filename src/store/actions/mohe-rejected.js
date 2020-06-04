@@ -1,6 +1,6 @@
 import { dateAndTime } from "../../utils";
 
-export const moheFinalApprobation = (applicantDetails) => {
+export const moheFinalRejection = (applicantDetails) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
 
@@ -19,25 +19,25 @@ export const moheFinalApprobation = (applicantDetails) => {
         });
       })
       .then(() => {
-        firestore.collection("moheFinalApprovedList").add({
+        firestore.collection("moheFinalRejectList").add({
           ...applicantDetails,
           createdAt: dateAndTime(),
         });
       })
       .then(() => {
-        console.log("mohe-final-approved");
+        console.log("mohe-final-reject");
         if (docID) {
           firestore.collection("applicationForms").doc(`${docID}`).update({
-            isVerified: "mohe-final-approved",
+            isVerified: "mohe-final-reject",
           });
         }
       })
 
       .then(() => {
-        dispatch({ type: "APPROVED_APPLICANT_SUCCESS" });
+        dispatch({ type: "MOHE_REJECTED_APPLICATION_SUCCESS" });
       })
       .catch((err) => {
-        dispatch({ type: "APPROVED_APPLICANT_ERROR" }, err);
+        dispatch({ type: "MOHE_REJECTED_APPLICATION_ERROR" }, err);
       });
   };
 };

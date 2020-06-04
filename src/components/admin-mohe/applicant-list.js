@@ -19,6 +19,15 @@ const ApplicantInfo = ({ applicantList }) => {
                     <b>
                       {applicant.englishFirstName} {applicant.englishLastName}
                     </b>
+
+                    {applicant.isVerified === "already-approved-by-attache" ||
+                    applicant.isVerified === "already-rejected-by-attache" ? (
+                      <label> ( Attache Verification Done )</label>
+                    ) : null}
+                    {applicant.isVerified === "mohe-final-approved" ||
+                    applicant.isVerified === "mohe-final-reject" ? (
+                      <label> ( MOHE Verification Done )</label>
+                    ) : null}
                   </span>
                   <span style={{ float: "right" }}>
                     <Link to={`/applicant/${applicant.id}`} key={applicant.id}>

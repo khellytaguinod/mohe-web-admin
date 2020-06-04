@@ -49,7 +49,9 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: "applicationForms", orderBy: ["createdAt", "desc"] },
-    { collection: "notifications", limit: 50, orderBy: ["time", "desc"] },
+    // { collection: "applicationForms", orderBy: ["createdAt", "desc"] },
+    // { collection: "notifications", limit: 50, orderBy: ["time", "desc"] },
+    { collection: "applicationForms" },
+    { collection: "notifications", limit: 50 },
   ])
 )(MOHEDashboard);

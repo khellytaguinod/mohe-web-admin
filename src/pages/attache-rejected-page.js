@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const ApprovalSuccessPage = (props) => {
+const RejectedPageAttache = (props) => {
   const { auth } = props;
 
   if (!auth.uid) return <Redirect to="/sign-in" />;
@@ -17,16 +17,16 @@ const ApprovalSuccessPage = (props) => {
 
           <span style={{ textAlign: "center" }}>
             <img
-              src="https://cdn3.iconfinder.com/data/icons/flat-actions-icons-9/792/Tick_Mark_Dark-512.png"
+              src="https://www.onlygfx.com/wp-content/uploads/2016/09/red-rejected-stamp-4.png"
               alt="success icon"
               className="success-img"
             />
-
-            <p>The Applicant Application was successfully approved.</p>
+            <br />
+            <p>The Applicant Application was marked rejected.</p>
             <br />
             <p>
-              The Applicant will be notified about your approval of the
-              application that was submitted.
+              The MOHE of Oman will be able to see your decision to help decide
+              about the applicant approval.
             </p>
             <br />
             <br />
@@ -51,4 +51,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(ApprovalSuccessPage);
+export default connect(mapStateToProps)(RejectedPageAttache);

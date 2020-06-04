@@ -18,6 +18,7 @@ const AttacheDashboard = (props) => {
   const getApplicantDocuments = (country) => {
     db.collection("applicationForms")
       .where("birthPlace", "==", `${country}`)
+      .where("isVerified", "==", `attache-waiting`)
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
@@ -75,7 +76,7 @@ export default compose(
   firestoreConnect([
     {
       collection: "applicationForms",
-      orderBy: ["createdAt", "desc"],
+      // orderBy: ["createdAt", "desc"],
     },
   ])
 )(AttacheDashboard);

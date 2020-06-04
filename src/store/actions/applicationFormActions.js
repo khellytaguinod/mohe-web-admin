@@ -1,4 +1,4 @@
-import { dateAndTime } from "../../utils";
+// import { dateAndTime } from "../../utils";
 
 export const createApplicationForm = (formDetails) => {
   return (dispatch, getState, { getFirestore }) => {
@@ -14,7 +14,7 @@ export const createApplicationForm = (formDetails) => {
         authorLastName: profile.lastName,
         applicantEmail: profile.userEmail,
         authorId: authorId,
-        createdAt: dateAndTime(),
+        // createdAt: dateAndTime(),
       })
       .then(() => {
         dispatch({ type: "CREATE_APPLICATION_FORM_SUCCESS" });
